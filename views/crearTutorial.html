@@ -1,0 +1,37 @@
+<div class="overlay" id="modal-tutorial">
+  <div class="modal">
+    <h2 id="modal-tut-titol">Nou tutorial</h2>
+    <label>Títol *
+      <input type="text" id="tut-titol" placeholder="Nom del tutorial" />
+    </label>
+    <label>Categoria *
+      <select id="tut-cat">
+        <option value="">-- Tria --</option>
+        <option>Magia</option>
+        <option>Clown</option>
+        <option>Circ</option>
+      </select>
+    </label>
+    <label>Nivell *
+      <select id="tut-nivell">
+        <option value="">-- Tria --</option>
+        <option>principiant</option>
+        <option>intermedi</option>
+        <option>avançat</option>
+      </select>
+    </label>
+    <label>Durada (minuts) *
+      <input type="number" id="tut-durada" min="1" placeholder="Ex: 15" />
+    </label>
+    <label>URL del vídeo *
+      <input type="url" id="tut-url" placeholder="https://youtube.com/embed/..." />
+    </label>
+    <label>Descripció
+      <textarea id="tut-desc" placeholder="Explica de què tracta..."></textarea>
+    </label>
+    <p class="err" id="tut-err"></p>
+    <div class="modal-footer">
+      <button class="btn-save" onclick="guardarTutorial()">Guardar</button>
+    </div>
+  </div>
+</div>

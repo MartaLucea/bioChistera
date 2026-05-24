@@ -1,0 +1,81 @@
+@import url('paletaColores.css');
+
+main {
+    padding: 2rem 1rem 4rem;
+}
+
+#tutorials{
+    align-self: center;
+}
+#loading,
+#error {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--text-suau);
+}
+
+section p a {
+    color: var(--or);
+    text-decoration: none;
+}
+
+section p a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    color: var(--lilaClar);
+    margin: 1rem 0;
+    font-size: 2rem;
+}
+
+.meta {
+    color: var(--text-suau);
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.video {
+    margin-bottom: 2rem;
+}
+
+.video iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: var(--radi);
+    background: black;
+}
+
+.card {
+    background: var(--fons-2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radi);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    color: var(--blanc);
+}
+
+.card p {
+    line-height: 1.6;
+    color: var(--text-suau);
+}
+
+.boto {
+    display: inline-block;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 1px solid var(--lilaClar);
+    color: var(--lilaClar);
+    transition: 0.2s;
+}
+
+.boto:hover {
+    border-color: var(--or);
+    color: var(--or);
+}

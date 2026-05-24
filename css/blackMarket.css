@@ -1,0 +1,326 @@
+/* =============================================
+   backmarket.css
+   Pàgina 9 — Anàlisi de sostenibilitat Back Market
+   Depèn de: paletaColores.css
+   ============================================= */
+
+/* --- NAVBAR (adapta al teu navbar global) --- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--fons-2);
+  border-bottom: 0.5px solid var(--blau);
+  padding: 0.85rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--or);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-size: 14px;
+  color: var(--text-suau);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.nav-active {
+  color: var(--or);
+}
+
+/* --- LAYOUT PRINCIPAL --- */
+.bm-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  color: var(--text);
+}
+
+/* --- HERO --- */
+.bm-hero {
+  background: var(--fons-2);
+  border: 0.5px solid var(--blau);
+  border-radius: var(--radi);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.bm-logo-box {
+  width: 64px;
+  height: 64px;
+  background: var(--vermell);
+  border-radius: var(--radi);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bm-logo-box span {
+  color: var(--blanc);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.bm-hero-text h1 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--blanc);
+  margin: 0 0 4px;
+}
+
+.bm-hero-text p {
+  font-size: 14px;
+  color: var(--text-suau);
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.bm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bm-tag {
+  display: inline-block;
+  background: var(--blau);
+  color: var(--lilaClar);
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* --- STATS --- */
+.bm-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.bm-stat {
+  background: var(--fons-2);
+  border: 0.5px solid var(--blau);
+  border-radius: var(--radi);
+  padding: 1rem 1.25rem;
+  text-align: center;
+}
+
+.bm-stat .val {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--or);
+  display: block;
+}
+
+.bm-stat .lbl {
+  font-size: 12px;
+  color: var(--text-suau);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* --- TÍTOL DE SECCIÓ --- */
+.bm-section-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--blau-clar);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin: 0 0 0.75rem;
+}
+
+/* --- CARDS D'ACCIONS --- */
+.bm-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.bm-card {
+  background: var(--fons-2);
+  border: 0.5px solid var(--blau);
+  border-radius: var(--radi);
+  padding: 1rem 1.25rem;
+}
+
+.bm-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.bm-accent-red    { background: rgba(232, 35, 74, 0.15); }
+.bm-accent-blue   { background: rgba(74, 95, 212, 0.18); }
+.bm-accent-gold   { background: rgba(245, 200, 66, 0.15); }
+.bm-accent-purple { background: rgba(238, 234, 255, 0.08); }
+
+.bm-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blanc);
+  margin: 0 0 6px;
+}
+
+.bm-card p {
+  font-size: 13px;
+  color: var(--text-suau);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* --- STAKEHOLDERS --- */
+.bm-stakeholders {
+  background: var(--fons-2);
+  border: 0.5px solid var(--blau);
+  border-radius: var(--radi);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.bm-stakeholders ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.bm-stakeholders li {
+  font-size: 13px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--fons);
+  border-radius: 6px;
+  border: 0.5px solid var(--blau);
+}
+
+.bm-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* --- TAULA DE MÈTRIQUES --- */
+.bm-measure {
+  background: var(--fons-2);
+  border: 0.5px solid var(--blau);
+  border-radius: var(--radi);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.bm-measure-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--blau);
+}
+
+.bm-measure-row:last-child {
+  border-bottom: none;
+}
+
+.bm-measure-row .metric-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--lilaClar);
+  min-width: 170px;
+  flex-shrink: 0;
+}
+
+.bm-measure-row .metric-val {
+  font-size: 13px;
+  color: var(--text-suau);
+  line-height: 1.6;
+}
+
+/* --- B CORP BANNER --- */
+.bm-bcorp {
+  background: rgba(74, 95, 212, 0.1);
+  border: 0.5px solid var(--blau-clar);
+  border-radius: var(--radi);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.bm-bcorp-badge {
+  width: 40px;
+  height: 40px;
+  background: var(--blau-clar);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--blanc);
+  flex-shrink: 0;
+}
+
+.bm-bcorp p {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.bm-bcorp strong {
+  color: var(--lilaClar);
+}
+
+/* --- FONT / CRÈDITS --- */
+.bm-source {
+  font-size: 12px;
+  color: var(--text-suau);
+  text-align: right;
+  border-top: 0.5px solid var(--blau);
+  padding-top: 0.75rem;
+}
+
+.bm-source a {
+  color: var(--blau-clar);
+  text-decoration: none;
+}
+
+.bm-source a:hover {
+  color: var(--or);
+}
