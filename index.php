@@ -46,7 +46,7 @@
             <h2>Explora per categoria</h2>
             <div class="graella-categories">
                 <a href="#" class="categoria">
-                    <img src="https://fluentdeck.vercel.app/emoji/png/animated/crystal_ball_animated.png" alt="Star" width="50"/><strong>Màgia</strong>
+                    <img src="https://fluentdeck.vercel.app/emoji/png/animated/crystal_ball_animated.png" alt="Star" width="50" /><strong>Màgia</strong>
                     <p>Baralles, varetas...</p>
                 </a>
                 <a href="mercat.php?cat=circ" class="cat-item">
@@ -55,12 +55,12 @@
                     <p>Malabars, monocicles, cèrcols...</p>
                 </a>
                 <a href="mercat.php?cat=clown" class="cat-item">
-                    <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Performing%20Arts.png" alt="Performing Arts" width="50"/>
+                    <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Performing%20Arts.png" alt="Performing Arts" width="50" />
                     <strong>Clown</strong>
                     <p>Nassos, vestits, maquillatge...</p>
                 </a>
                 <a href="/pages/tutorials.php" class="cat-item">
-                    <img src="https://fluentdeck.vercel.app/emoji/png/3D/clapper_board_3d.png" alt="Performing Arts" width="50"/>
+                    <img src="https://fluentdeck.vercel.app/emoji/png/3D/clapper_board_3d.png" alt="Performing Arts" width="50" />
                     <strong>Tutorials</strong>
                     <p>Vídeos de la comunitat</p>
                 </a>
@@ -72,7 +72,7 @@
         <div class="contenidor">
             <div class="cap-seccio">
                 <h2>Últims articles</h2>
-                <a href="mercat.php">Veure tots →</a>
+                <a href="pages/productes.php">Veure tots →</a>
             </div>
             <div class="graella-articles" id="articles-js">
                 <p class="carregant">Carregant articles...</p>
@@ -84,7 +84,7 @@
         <div class="contenidor">
             <div class="cap-seccio">
                 <h2>Tutorials recents</h2>
-                <a href="tutorials.php">Veure tots →</a>
+                <a href="pages/tutorials.php">Veure tots →</a>
             </div>
             <div class="graella-tutorials" id="tutorials-js">
                 <p class="carregant">Carregant tutorials...</p>
@@ -167,5 +167,50 @@
 
     <?php include_once 'include/footer.html'; ?>
 </body>
+<script>
+    async function recents() {
+        try {
+            const response = await fetch(`http://localhost:3001/recents`);
+
+            if (!response.ok) {
+                throw new Error("Error al obtenir els recents");
+            }
+
+            const tot = await response.json();
+
+            console.log(tot);
+
+            const grid = document.getElementById('tutorials-js');
+
+            if (!tot.tutorials.length) return;
+
+            grid.innerHTML = tot.tutorials.map(t => `
+      <div class="card">
+        <span class="card-cat cat-${t.categoria.toLowerCase()}">${t.categoria}</span>
+        <h3>${t.titol}</h3>
+        <div class="card-meta">
+          <span>${t.durada_minuts} min</span>
+        </div>
+      </div>
+    `).join('');
+
+            const materials = document.getElementById('articles-js');
+
+            if (tot.productes.length) {
+                materials.innerHTML = tot.productes.map(p => `
+        <div class="card">
+          <h3>${p.nom}</h3>
+          <p>${p.descripcio}</p>
+        </div>
+      `).join('');
+            }
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+    recents();
+</script>
 
 </html>
