@@ -32,5 +32,3 @@ function validarToken() {
     return $payload;
 }
 ?>
-
-?>

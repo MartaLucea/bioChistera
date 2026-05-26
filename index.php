@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="public/css/portada.css">
     <title>BioChistera</title>
 </head>
 
 <body>
 
-    <?php include_once 'include/header.php'; ?>
+    <?php include_once 'views/layout/header.php'; ?>
 
     <section id="capcalera">
         <h1>Bio🎩Chistera</h1>
@@ -20,8 +20,8 @@
             Compra, ven, intercanvia i aprèn amb tutorials de la comunitat.
         </p>
         <div class="botons">
-            <a href="pages/productes.php" class="boto principal">Explorar el mercat</a>
-            <a href="pages/tutorials.php" class="boto secundari">Veure tutorials</a>
+            <a href="views/productes/index..php" class="boto principal">Explorar el mercat</a>
+            <a href="views/tutorials/index.php" class="boto secundari">Veure tutorials</a>
         </div>
     </section>
     <section id="sobre">
@@ -45,21 +45,21 @@
         <div class="contenidor">
             <h2>Explora per categoria</h2>
             <div class="graella-categories">
-                <a href="#" class="categoria">
+                <a href="views/productes/index.php" class="categoria">
                     <img src="https://fluentdeck.vercel.app/emoji/png/animated/crystal_ball_animated.png" alt="Star" width="50" /><strong>Màgia</strong>
                     <p>Baralles, varetas...</p>
                 </a>
-                <a href="mercat.php?cat=circ" class="cat-item">
+                <a href="views/productes/index.php" class="cat-item">
                     <img src="https://fluentdeck.vercel.app/emoji/png/3D/circus_tent_3d.png" alt="Performing Arts" width="50" />
                     <strong>Circ</strong>
                     <p>Malabars, monocicles, cèrcols...</p>
                 </a>
-                <a href="mercat.php?cat=clown" class="cat-item">
+                <a href="views/productes/index.php" class="cat-item">
                     <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Performing%20Arts.png" alt="Performing Arts" width="50" />
                     <strong>Clown</strong>
                     <p>Nassos, vestits, maquillatge...</p>
                 </a>
-                <a href="/pages/tutorials.php" class="cat-item">
+                <a href="views/tutorials/index.php" class="cat-item">
                     <img src="https://fluentdeck.vercel.app/emoji/png/3D/clapper_board_3d.png" alt="Performing Arts" width="50" />
                     <strong>Tutorials</strong>
                     <p>Vídeos de la comunitat</p>
@@ -72,7 +72,7 @@
         <div class="contenidor">
             <div class="cap-seccio">
                 <h2>Últims articles</h2>
-                <a href="pages/productes.php">Veure tots →</a>
+                <a href="views/productes/index.php.php">Veure tots →</a>
             </div>
             <div class="graella-articles" id="articles-js">
                 <p class="carregant">Carregant articles...</p>
@@ -84,7 +84,7 @@
         <div class="contenidor">
             <div class="cap-seccio">
                 <h2>Tutorials recents</h2>
-                <a href="pages/tutorials.php">Veure tots →</a>
+                <a href="views/tutorials/index.php.php">Veure tots →</a>
             </div>
             <div class="graella-tutorials" id="tutorials-js">
                 <p class="carregant">Carregant tutorials...</p>
@@ -150,7 +150,7 @@
                     <p>La plataforma és en si mateixa una xarxa de col·laboració.</p>
                 </div>
             </div>
-            <a href="ods.php" class="boto-secundari">Saber-ne més</a>
+            <a href="views/ods/index.php" class="boto-secundari">Saber-ne més</a>
         </div>
     </section>
 
@@ -159,13 +159,13 @@
             <h2>Llest per treure el conill del barret?</h2>
             <p>Publica el teu primer producte avui i dona-li una segona vida al teu material.</p>
             <div class="botons">
-                <a href="/views/register.php" class="boto principal">Publicar producte</a>
-                <a href="/views/register.php" class="boto secundari">Crear compte gratis</a>
+                <a href="views/auth/register.php" class="boto principal">Publicar producte</a>
+                <a href="views/auth/register.php" class="boto secundari">Crear compte gratis</a>
             </div>
         </div>
     </section>
 
-    <?php include_once 'include/footer.html'; ?>
+    <?php include_once 'views/layout/footer.html'; ?>
 </body>
 <script>
     async function recents() {
@@ -185,24 +185,34 @@
             if (!tot.tutorials.length) return;
 
             grid.innerHTML = tot.tutorials.map(t => `
-      <div class="card">
-        <span class="card-cat cat-${t.categoria.toLowerCase()}">${t.categoria}</span>
-        <h3>${t.titol}</h3>
-        <div class="card-meta">
-          <span>${t.durada_minuts} min</span>
-        </div>
-      </div>
+            <div class="article" onclick="window.location.href='../views/tutorials/detall.php?id=${t.id}'">
+                <span class="card-cat cat-${t.categoria.toLowerCase()}">${t.categoria}</span>
+                <h3>${t.titol}</h3>
+                <div class="card-meta">
+                <span>${t.durada_minuts} min</span>
+                </div>
+            </div>
     `).join('');
 
             const materials = document.getElementById('articles-js');
 
             if (tot.productes.length) {
-                materials.innerHTML = tot.productes.map(p => `
-        <div class="card">
-          <h3>${p.nom}</h3>
-          <p>${p.descripcio}</p>
-        </div>
-      `).join('');
+                materials.innerHTML = tot.productes.map(p => {
+
+                const mostra = p.preu > 0
+                    ? `${p.preu} €`
+                    : "Donació";
+
+                return `
+                    <div class="article" onclick="window.location.href='../views/productes/detall.php?id=${p.id}'">
+                        <h3>${p.nom}</h3>
+                        <p>${p.descripcio}</p>
+                        <p><strong>Categoria:</strong> ${p.categoria}</p>
+                        <p><strong>${mostra}</strong></p>
+                    </div>
+                `;
+                
+                }).join('');
             }
 
         } catch (error) {
