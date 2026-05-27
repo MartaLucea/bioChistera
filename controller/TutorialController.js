@@ -17,7 +17,7 @@ export const getById = (db) => (req, res) => {
 };
 
 export const crear = (db) => (req, res) => {
-    const { titol, categoria, id_usuari } = req.body;
+    const { titol, categoria, id_usuari,  } = req.body;
     if (!titol || !categoria || !id_usuari)
         return res.status(400).json({ error: "Falten camps obligatoris" });
 

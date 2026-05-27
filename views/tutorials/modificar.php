@@ -41,11 +41,6 @@ if (!$id) {
             </div>
 
             <div>
-                <label for="subcategoria">Subcategoria</label>
-                <input type="text" id="subcategoria">
-            </div>
-
-            <div>
                 <label for="descripcio">Descripció</label>
                 <textarea id="descripcio" rows="4"></textarea>
             </div>
@@ -86,7 +81,6 @@ if (!$id) {
 
             document.getElementById("nom").value = tutorial.nom ?? "";
             document.getElementById("categoria").value = tutorial.categoria ?? "";
-            document.getElementById("subcategoria").value = tutorial.subcategoria ?? "";
             document.getElementById("descripcio").value = tutorial.descripcio ?? "";
             document.getElementById("durada").value = tutorial.durada ?? "";
             document.getElementById("url").value = tutorial.url ?? "";
@@ -105,7 +99,6 @@ if (!$id) {
 
             const nom = document.getElementById("nom").value.trim();
             const categoria = document.getElementById("categoria").value;
-            const subcategoria = document.getElementById("subcategoria").value.trim();
             const descripcio = document.getElementById("descripcio").value.trim();
             const durada = parseInt(document.getElementById("durada").value) || 0;
             const url = document.getElementById("url").value.trim();
@@ -126,7 +119,6 @@ if (!$id) {
                     body: JSON.stringify({
                         nom,
                         categoria,
-                        subcategoria,
                         descripcio,
                         durada,
                         url,

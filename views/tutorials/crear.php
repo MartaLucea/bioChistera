@@ -46,11 +46,6 @@ if ($token) {
             </div>
 
             <div>
-                <label for="subcategoria">Subcategoria</label>
-                <input type="text" id="subcategoria">
-            </div>
-
-            <div>
                 <label for="descripcio">Descripció</label>
                 <textarea id="descripcio" rows="4"></textarea>
             </div>
@@ -84,7 +79,6 @@ if ($token) {
 
             const nom = document.getElementById("nom").value.trim();
             const categoria = document.getElementById("categoria").value;
-            const subcategoria = document.getElementById("subcategoria").value.trim();
             const descripcio = document.getElementById("descripcio").value.trim();
             const durada = parseInt(document.getElementById("durada").value) || 0;
             const url = document.getElementById("url").value.trim();
@@ -105,10 +99,9 @@ if ($token) {
                     body: JSON.stringify({
                         titol: nom,
                         categoria,
-                        subcategoria,
                         descripcio,
-                        durada,
-                        url,
+                        durada_minuts: durada,
+                        video_url: url,
                         id_usuari: <?= json_encode($userId) ?>
                     })
                 });

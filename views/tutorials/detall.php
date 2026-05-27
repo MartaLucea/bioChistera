@@ -53,7 +53,6 @@
             <h3>Informació</h3>
 
             <p><strong>Categoria:</strong> <span id="categoria"></span></p>
-            <p><strong>Subcategoria:</strong> <span id="subcategoria"></span></p>
         </div>
 
     </section>
@@ -111,9 +110,6 @@ async function carregarTutorial() {
 
         document.getElementById('categoria').textContent =
             t.categoria;
-
-        document.getElementById('subcategoria').textContent =
-            t.subcategoria;
 
     } catch (e) {
         mostrarError();

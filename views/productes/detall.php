@@ -66,7 +66,6 @@
                 <h3>Informació</h3>
                 <p><strong>Preu:</strong> <span id="preu"></span></p>
                 <p><strong>Categoria:</strong> <span id="categoria"></span></p>
-                <p><strong>Subcategoria:</strong> <span id="subcategoria"></span></p>
             </div>
             
         </section>
@@ -121,7 +120,6 @@
                 document.getElementById('imatge').src = p.imatge || '';
                 document.getElementById('descripcio').textContent = p.descripcio || '';
                 document.getElementById('categoria').textContent = p.categoria || '';
-                document.getElementById('subcategoria').textContent = p.subcategoria || '';
                 document.getElementById('preu').textContent = p.preu > 0 ? `${p.preu} €` : "Donació";
 
                 const btnComprar = document.getElementById('comprar');
