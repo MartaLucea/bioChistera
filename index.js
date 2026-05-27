@@ -12,19 +12,19 @@ app.use(express.json());
 app.use(cors());
 
 
-app.get("/tutorials",                  TutorialController.getAll(db));
+app.get("/tutorials", TutorialController.getAll(db));
 app.get("/tutorials/categoria/:tipus", TutorialController.getByCategoria(db));
-app.get("/tutorials/:id",              TutorialController.getById(db));
-app.post("/tutorials",                 TutorialController.crear(db));
-app.patch("/tutorials/:id",            TutorialController.actualitzar(db));
-app.delete("/tutorial/:id",           TutorialController.eliminar(db));
+app.get("/tutorials/:id", TutorialController.getById(db));
+app.post("/tutorials", TutorialController.crear(db));
+app.put("/tutorials/:id", TutorialController.actualitzar(db));
+app.delete("/tutorial/:id", TutorialController.eliminar(db));
 
-app.get("/productes",                  ProducteController.getAll(db));
+app.get("/productes", ProducteController.getAll(db));
 app.get("/productes/categoria/:tipus", ProducteController.getByCategoria(db));
-app.get("/productes/:id",              ProducteController.getById(db));
-app.post("/productes",                 ProducteController.crear(db));
-app.patch("/productes/:id",            ProducteController.actualitzar(db));
-app.delete("/producte/:id",           ProducteController.eliminar(db));
+app.get("/productes/:id", ProducteController.getById(db));
+app.post("/productes", ProducteController.crear(db));
+app.put("/productes/:id", ProducteController.actualitzar(db));
+app.delete("/producte/:id", ProducteController.eliminar(db));
 
 
 app.get("/usuari/:id", (req, res) => {
@@ -58,6 +58,6 @@ app.get("/recents", (req, res) => {
     });
 });
 
-app.listen(3001,()=>{
+app.listen(3001, () => {
     console.log("Server listing on port 3001");
 });

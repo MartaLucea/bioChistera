@@ -20,7 +20,7 @@
             Compra, ven, intercanvia i aprèn amb tutorials de la comunitat.
         </p>
         <div class="botons">
-            <a href="views/productes/index..php" class="boto principal">Explorar el mercat</a>
+            <a href="views/productes/index.php" class="boto principal">Explorar el mercat</a>
             <a href="views/tutorials/index.php" class="boto secundari">Veure tutorials</a>
         </div>
     </section>
@@ -72,7 +72,7 @@
         <div class="contenidor">
             <div class="cap-seccio">
                 <h2>Últims articles</h2>
-                <a href="views/productes/index.php.php">Veure tots →</a>
+                <a href="views/productes/index.php">Veure tots →</a>
             </div>
             <div class="graella-articles" id="articles-js">
                 <p class="carregant">Carregant articles...</p>
@@ -84,7 +84,7 @@
         <div class="contenidor">
             <div class="cap-seccio">
                 <h2>Tutorials recents</h2>
-                <a href="views/tutorials/index.php.php">Veure tots →</a>
+                <a href="views/tutorials/index.php">Veure tots →</a>
             </div>
             <div class="graella-tutorials" id="tutorials-js">
                 <p class="carregant">Carregant tutorials...</p>
@@ -185,7 +185,7 @@
             if (!tot.tutorials.length) return;
 
             grid.innerHTML = tot.tutorials.map(t => `
-            <div class="article" onclick="window.location.href='../views/tutorials/detall.php?id=${t.id}'">
+            <div class="article" onclick="window.location.href='views/tutorials/detall.php?id=${t.id}'">
                 <span class="card-cat cat-${t.categoria.toLowerCase()}">${t.categoria}</span>
                 <h3>${t.titol}</h3>
                 <div class="card-meta">
@@ -204,7 +204,7 @@
                     : "Donació";
 
                 return `
-                    <div class="article" onclick="window.location.href='../views/productes/detall.php?id=${p.id}'">
+                    <div class="article" onclick="window.location.href='views/productes/detall.php?id=${p.id}'">
                         <h3>${p.nom}</h3>
                         <p>${p.descripcio}</p>
                         <p><strong>Categoria:</strong> ${p.categoria}</p>

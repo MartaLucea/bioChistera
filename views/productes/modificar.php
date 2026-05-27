@@ -2,7 +2,10 @@
 require_once __DIR__ . "/../../proc/validar.php";
 
 $id = $_GET["id"] ?? null;
-if (!$id) { header("Location: /views/productes/index.php"); exit; }
+if (!$id) {
+    header("Location: /views/productes/index.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,124 +16,166 @@ if (!$id) { header("Location: /views/productes/index.php"); exit; }
     <link rel="stylesheet" href="/public/css/modificar.css">
     <title>BioChistera</title>
 </head>
+
 <body>
-    <?php include_once 'header.php'; ?>
-<main class="form-main">
-    <h2>Editar producte</h2>
-    <p style="color:red;" id="resultat"></p>
+    <?php include_once '../layout/header.php'; ?>
+    <main class="form-main">
+        <h2>Editar producte</h2>
+        <p style="color:red;" id="resultat"></p>
 
-    <form>
-        <div>
-            <label for="nom">Nom *</label>
-            <input type="text" id="nom" required>
-        </div>
+        <form>
+            <div>
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" required>
+            </div>
 
-        <div>
-            <label for="categoria">Categoria *</label>
-            <select id="categoria" required>
-                <option value="">Tria una categoria</option>
-                <option value="Magia">Màgia</option>
-                <option value="Circ">Circ</option>
-                <option value="Clown">Clown</option>
-            </select>
-        </div>
+            <div>
+                <label for="categoria">Categoria *</label>
+                <select id="categoria" required>
+                    <option value="">Tria una categoria</option>
+                    <option value="Magia">Màgia</option>
+                    <option value="Circ">Circ</option>
+                    <option value="Clown">Clown</option>
+                </select>
+            </div>
 
-        <div>
-            <label for="subcategoria">Subcategoria</label>
-            <input type="text" id="subcategoria">
-        </div>
+            <div>
+                <label for="subcategoria">Subcategoria</label>
+                <input type="text" id="subcategoria">
+            </div>
 
-        <div>
-            <label for="descripcio">Descripció</label>
-            <textarea id="descripcio" rows="4"></textarea>
-        </div>
+            <div>
+                <label for="descripcio">Descripció</label>
+                <textarea id="descripcio" rows="4"></textarea>
+            </div>
 
-        <div>
-            <label for="estat">Estat *</label>
-            <select id="estat" required>
-                <option value="">Tria l'estat</option>
-                <option value="nou">Nou</option>
-                <option value="bon_estat">Bon estat</option>
-                <option value="usat">Usat</option>
-                <option value="per_peces">Per peces</option>
-            </select>
-        </div>
+            <div>
+                <label for="imatge">URL de la imatge</label>
+                <input type="url" id="imatge">
+            </div>
 
-        <div>
-            <label for="imatge">URL de la imatge</label>
-            <input type="url" id="imatge">
-        </div>
+            <div>
+                <label for="donacio">Donació *</label>
+                <select id="donacio" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
 
-        <button class="submit" type="submit">Guardar canvis →</button>
-    </form>
-</main>
+            <div>
+                <label for="preu">Preu</label>
+                <input type="number" id="preu">
+            </div>
 
-<script>
-    const id = <?= json_encode($id) ?>;
+            <button class="submit" type="submit">Guardar canvis →</button>
+        </form>
+    </main>
 
-    async function carregarProducte() {
-        const res = await fetch(`http://localhost:3001/productes/${id}`);
-        const p = await res.json();
+    <script>
+        let id_usuari = null;
+        document.getElementById("donacio").addEventListener("change", (e) => {
+            const preu = document.getElementById("preu");
 
-        if (p.id_usuari !== payload.id && payload.rol !== "admin") {
-            window.location.assign("index.php");
-            return;
-        }
-
-        document.getElementById("nom").value          = p.nom ?? "";
-        document.getElementById("categoria").value    = p.categoria ?? "";
-        document.getElementById("subcategoria").value = p.subcategoria ?? "";
-        document.getElementById("descripcio").value   = p.descripcio ?? "";
-        document.getElementById("estat").value        = p.estat ?? "";
-        document.getElementById("imatge").value       = p.imatge ?? "";
-    }
-
-    function validar(nom, categoria, estat) {
-        if (!nom)       return "El nom és obligatori.";
-        if (nom.length < 3) return "El nom ha de tenir mínim 3 caràcters.";
-        if (!categoria) return "Tria una categoria.";
-        if (!estat)     return "Tria l'estat del producte.";
-        return null;
-    }
-
-    document.querySelector("form").addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const nom          = document.getElementById("nom").value.trim();
-        const categoria    = document.getElementById("categoria").value;
-        const subcategoria = document.getElementById("subcategoria").value.trim();
-        const descripcio   = document.getElementById("descripcio").value.trim();
-        const estat        = document.getElementById("estat").value;
-        const imatge       = document.getElementById("imatge").value.trim();
-        const resultat     = document.getElementById("resultat");
-
-        const error = validar(nom, categoria, estat);
-        if (error) { resultat.textContent = error; return; }
-
-        try {
-            const res = await fetch(`http://localhost:3001/productes/${id}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nom, categoria, subcategoria, descripcio, estat, imatge })
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                window.location.assign("/views/user/paginaUsuari.php");
+            if (e.target.value === "si") {
+                preu.value = 0;
+                preu.disabled = true;
             } else {
-                resultat.textContent = data.error;
+                preu.disabled = false;
+            }
+        });
+        const id = <?= json_encode($id) ?>;
+
+        async function carregarProducte() {
+            const res = await fetch(`http://localhost:3001/productes/${id}`);
+            if (!res.ok) {
+                window.location.assign("index.php");
+                return;
+            }
+            const p = await res.json();
+
+            if (p.donacio === "si") {
+                document.getElementById("preu").disabled = true;
             }
 
-        } catch (err) {
-            resultat.textContent = "Error de connexió.";
-            console.error(err);
+            id_usuari = p.id_usuari
+
+            if (p.id_usuari !== payload.id && payload.rol !== "admin") {
+                window.location.assign("index.php");
+                return;
+            }
+
+            document.getElementById("nom").value = p.nom ?? "";
+            document.getElementById("categoria").value = p.categoria ?? "";
+            document.getElementById("subcategoria").value = p.subcategoria ?? "";
+            document.getElementById("descripcio").value = p.descripcio ?? "";
+            document.getElementById("imatge").value = p.imatge ?? "";
+            document.getElementById("donacio").value = p.donacio ?? "";
+            document.getElementById("preu").value = p.preu ?? "";
         }
-    });
 
-    carregarProducte();
-</script>
+        function validar(nom, categoria, donacio, preu) {
+            if (!nom) return "El nom és obligatori.";
+            if (nom.length < 3) return "El nom ha de tenir mínim 3 caràcters.";
+            if (!categoria) return "Tria una categoria.";
+            if (!donacio) return "Tria si el producte és donació.";
+            if (donacio === "no" && preu <= 0) return "Si no és donació necessita un preu";
+            return null;
+        }
 
-<?php include_once __DIR__ . "/../layout/footer.html"; ?>
+        document.querySelector("form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const nom = document.getElementById("nom").value.trim();
+            const categoria = document.getElementById("categoria").value;
+            const subcategoria = document.getElementById("subcategoria").value.trim();
+            const descripcio = document.getElementById("descripcio").value.trim();
+            const imatge = document.getElementById("imatge").value.trim();
+            const resultat = document.getElementById("resultat");
+            const donacio = document.getElementById("donacio").value;
+            const preu = parseFloat(document.getElementById("preu").value) || 0;
+
+            const error = validar(nom, categoria, donacio, preu);
+            if (error) {
+                resultat.textContent = error;
+                return;
+            }
+
+            try {
+                const res = await fetch(`http://localhost:3001/productes/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nom,
+                        categoria,
+                        subcategoria,
+                        descripcio,
+                        imatge,
+                        id_usuari,
+                        donacio,
+                        preu,
+                    })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    window.location.assign("/views/user/paginaUsuari.php");
+                } else {
+                    resultat.textContent = data.error;
+                }
+
+            } catch (err) {
+                resultat.textContent = "Error de connexió.";
+                console.error(err);
+            }
+        });
+
+        carregarProducte();
+    </script>
+
+    <?php include_once __DIR__ . "/../layout/footer.html"; ?>
 </body>
+
 </html>

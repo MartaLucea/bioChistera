@@ -20,7 +20,7 @@ require_once "../../controller/odsController.php";
 
         <section class="ods-detail-hero ods-detail-hero--<?php echo $ods ?>">
             <div class="contenidor">
-                <p class="ods-hero__breadcrumb"><a href="../index.php">Inici</a> › <a href="../views/ods/index.php">ODS</a> ›
+                <p class="ods-hero__breadcrumb"><a href="../index.php">Inici</a> › <a href="index.php">ODS</a> ›
                     ODS <?php echo $ods ?></p>
                 <div class="ods-detail-hero__inner">
                     <div class="ods-detail-hero__text">

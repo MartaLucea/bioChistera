@@ -1,104 +1,124 @@
 <?php
 require_once __DIR__ . "/../../proc/validar.php";
-include_once __DIR__ . "/../layout/head.php";
+
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
-<main class="form-main">
-    <h2>Nou tutorial</h2>
-    <p style="color:red;" id="resultat"></p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/modificar.css">
+    <title>BioChistera</title>
+</head>
 
-    <form>
-        <div>
-            <label for="titol">Títol *</label>
-            <input type="text" id="titol" required placeholder="Títol del tutorial">
-        </div>
+<body>
+    <?php include_once '../layout/header.php'; ?>
 
-        <div>
-            <label for="categoria">Categoria *</label>
-            <select id="categoria" required>
-                <option value="">Tria una categoria</option>
-                <option value="Magia">Màgia</option>
-                <option value="Circ">Circ</option>
-                <option value="Clown">Clown</option>
-            </select>
-        </div>
+    <main class="form-main">
+        <h2>Crear tutorial</h2>
+        <p style="color:red;" id="resultat"></p>
 
-        <div>
-            <label for="subcategoria">Subcategoria</label>
-            <input type="text" id="subcategoria" placeholder="Ex: Cartomagia, Malabars...">
-        </div>
+        <form>
+            <div>
+                <label for="nom">Títol *</label>
+                <input type="text" id="nom" required>
+            </div>
 
-        <div>
-            <label for="descripcio">Descripció</label>
-            <textarea id="descripcio" rows="4" placeholder="De què tracta el tutorial..."></textarea>
-        </div>
+            <div>
+                <label for="categoria">Categoria *</label>
+                <select id="categoria" required>
+                    <option value="">Tria una categoria</option>
+                    <option value="Magia">Màgia</option>
+                    <option value="Circ">Circ</option>
+                    <option value="Clown">Clown</option>
+                </select>
+            </div>
 
-        <div>
-            <label for="durada">Durada (minuts) *</label>
-            <input type="number" id="durada" required min="1" placeholder="Ex: 15">
-        </div>
+            <div>
+                <label for="subcategoria">Subcategoria</label>
+                <input type="text" id="subcategoria">
+            </div>
 
-        <div>
-            <label for="video_url">URL del vídeo *</label>
-            <input type="url" id="video_url" required placeholder="https://youtube.com/...">
-        </div>
+            <div>
+                <label for="descripcio">Descripció</label>
+                <textarea id="descripcio" rows="4"></textarea>
+            </div>
 
-        <button class="submit" type="submit">Publicar tutorial →</button>
-    </form>
-</main>
+            <div>
+                <label for="durada">Durada (minuts)</label>
+                <input type="number" id="durada" min="0">
+            </div>
 
-<script>
-    const payload = <?= json_encode($payload) ?>;
-    function validar(titol, categoria, durada, video_url) {
-        if (!titol)     return "El títol és obligatori.";
-        if (titol.length < 3) return "El títol ha de tenir mínim 3 caràcters.";
-        if (!categoria) return "Tria una categoria.";
-        if (!durada || durada < 1) return "La durada ha de ser un número positiu.";
-        if (!video_url) return "La URL del vídeo és obligatòria.";
-        if (!video_url.startsWith("http")) return "La URL no és vàlida.";
-        return null;
-    }
+            <div>
+                <label for="url">URL del vídeo *</label>
+                <input type="url" id="url" required>
+            </div>
 
-    document.querySelector("form").addEventListener("submit", async (e) => {
-        e.preventDefault();
+            <button class="submit" type="submit">Crear tutorial →</button>
+        </form>
+    </main>
 
-        const titol       = document.getElementById("titol").value.trim();
-        const categoria   = document.getElementById("categoria").value;
-        const subcategoria = document.getElementById("subcategoria").value.trim();
-        const descripcio  = document.getElementById("descripcio").value.trim();
-        const durada      = parseInt(document.getElementById("durada").value);
-        const video_url   = document.getElementById("video_url").value.trim();
-        const resultat    = document.getElementById("resultat");
+    <script>
+        function validar(nom, categoria, url, durada) {
+            if (!nom) return "El títol és obligatori.";
+            if (nom.length < 3) return "El títol ha de tenir mínim 3 caràcters.";
+            if (!categoria) return "Tria una categoria.";
+            if (!url) return "La URL del vídeo és obligatòria.";
+            if (durada < 0 || isNaN(durada)) return "La durada no pot ser negativa.";
+            return null;
+        }
 
-        const error = validar(titol, categoria, durada, video_url);
-        if (error) { resultat.textContent = error; return; }
+        document.querySelector("form").addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-        try {
-            const res = await fetch("http://localhost:3001/tutorials", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    titol, categoria, subcategoria, descripcio,
-                    durada_minuts: durada, video_url,
-                    id_usuari: payload.id
-                })
-            });
+            const nom = document.getElementById("nom").value.trim();
+            const categoria = document.getElementById("categoria").value;
+            const subcategoria = document.getElementById("subcategoria").value.trim();
+            const descripcio = document.getElementById("descripcio").value.trim();
+            const durada = parseInt(document.getElementById("durada").value) || 0;
+            const url = document.getElementById("url").value.trim();
+            const resultat = document.getElementById("resultat");
 
-            const data = await res.json();
-
-            if (res.ok) {
-                window.location.assign("/views/user/paginaUsuari.php");
-            } else {
-                resultat.textContent = data.error;
+            const error = validar(nom, categoria, url, durada);
+            if (error) {
+                resultat.textContent = error;
+                return;
             }
 
-        } catch (err) {
-            resultat.textContent = "Error de connexió.";
-            console.error(err);
-        }
-    });
-</script>
+            try {
+                const res = await fetch(`http://localhost:3001/tutorials`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nom,
+                        categoria,
+                        subcategoria,
+                        descripcio,
+                        durada,
+                        url,
+                        id_usuari: payload.id
+                    })
+                });
 
-<?php include_once __DIR__ . "/../layout/footer.html"; ?>
+                const data = await res.json();
+
+                if (res.ok) {
+                    window.location.assign("/views/tutorials/index.php");
+                } else {
+                    resultat.textContent = data.error;
+                }
+
+            } catch (err) {
+                resultat.textContent = "Error de connexió.";
+                console.error(err);
+            }
+        });
+    </script>
+
+    <?php include_once __DIR__ . "/../layout/footer.html"; ?>
 </body>
+
 </html>

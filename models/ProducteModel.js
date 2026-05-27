@@ -12,11 +12,11 @@ export const getById = (db, id) => {
 };
 
 export const crear = (db, dades) => {
-    const { nom, categoria, descripcio, preu, estat, id_usuari } = dades;
+    const { nom, categoria, descripcio, preu, id_usuari } = dades;
     const result = db.prepare(`
-        INSERT INTO productes (nom, categoria, descripcio, estat, id_usuari,  donacio, preu, data_publicacio)
-        VALUES (?, ?, ?, ?, ?, ?,? DATE('now'))
-    `).run(nom, categoria, descripcio, estat, id_usuari, donacio, preu );
+        INSERT INTO productes (nom, categoria, descripcio, id_usuari, donacio, preu, data_publicacio)
+        VALUES (?, ?, ?, ?, ?, ?,?, DATE('now'))
+    `).run(nom, categoria, descripcio, id_usuari, donacio, preu );
     return result.lastInsertRowid;
 };
 

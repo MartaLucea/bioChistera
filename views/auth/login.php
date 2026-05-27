@@ -1,8 +1,12 @@
-    <?php
-    if (isset($_COOKIE['token'])) {
-        header("Location: /index.php");
-        exit();
+<?php
+$token = $_COOKIE["token"] ?? null;
+if ($token) {
+    $parts = explode(".", $token);
+    if (count($parts) === 3) {
+        header("Location: /views/user/paginaUsuari.php");
+        exit;
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +40,7 @@
 
             <p class="no-registrar" style="text-align:center; margin-top:1rem;">
                 ¿No tienes cuenta?
-                <a class="registrar" href="/views/auth/register.php">Regístrate aquí</a>
+                <a class="registrar" href="register.php">Regístrate aquí</a>
             </p>
         </main>
         <script>

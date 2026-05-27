@@ -65,14 +65,14 @@ async function carregarUsuari() {
     if (!tot.tutorials.length) return;
 
     grid.innerHTML = tot.tutorials.map(t => `
-      <div class="card" onclick="window.location.href='../views/tutorials/detall.php?id=${t.id}'">
+      <div class="card" onclick="window.location.href='../tutorials/detall.php?id=${t.id}'">
         <span class="card-cat cat-${t.categoria.toLowerCase()}">${t.categoria}</span>
         <h3>${t.titol}</h3>
         <div class="card-meta">
           <span>${t.durada_minuts} min</span>
         </div>
         <div class="botons">
-            <p onclick="window.location.href='../views/tutorials/modificar.php?id=${t.id}'">Modificar</p>
+            <p onclick="event.stopPropagation(); window.location.href='../tutorials/modificar.php?id=${t.id}'">Modificar</p>
             <p onclick="event.stopPropagation(); eliminar(${t.id}, 'tutorial', this.closest('.card'))">
               Eliminar
             </p>
@@ -84,11 +84,11 @@ async function carregarUsuari() {
 
     if (tot.productes.length) {
       materials.innerHTML = tot.productes.map(p => `
-        <div class="card" onclick="window.location.href='../views/productes/detall.php?id=${p.id}'">
+        <div class="card" onclick="window.location.href='../productes/detall.php?id=${p.id}'">
           <h3>${p.nom}</h3>
           <p>${p.descripcio}</p>
           <div class="botons">
-            <p onclick="window.location.href='../views/productes/modificar.php?id=${p.id}'">Modificar</p>
+            <p onclick="event.stopPropagation(); window.location.href='../productes/modificar.php?id=${p.id}'">Modificar</p>
             <p onclick="event.stopPropagation(); eliminar(${p.id}, 'producte', this.closest('.card'))">
               Eliminar
             </p>

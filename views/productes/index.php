@@ -150,7 +150,7 @@ function mostrarProductes(articles) {
         card.classList.add("article");
 
         card.addEventListener("click", () => {
-            window.location.href = `/views/productes/detall.php?id=${article.id}`;
+            window.location.href = `detall.php?id=${article.id}`;
         });
 
         card.innerHTML = `

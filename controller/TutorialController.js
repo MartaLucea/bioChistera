@@ -17,8 +17,8 @@ export const getById = (db) => (req, res) => {
 };
 
 export const crear = (db) => (req, res) => {
-    const { titol, categoria, nivell, id_usuari } = req.body;
-    if (!titol || !categoria || !nivell || !id_usuari)
+    const { titol, categoria, id_usuari } = req.body;
+    if (!titol || !categoria || !id_usuari)
         return res.status(400).json({ error: "Falten camps obligatoris" });
 
     const id = TutorialModel.crear(db, req.body);

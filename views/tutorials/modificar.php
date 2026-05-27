@@ -1,125 +1,157 @@
 <?php
 require_once __DIR__ . "/../../proc/validar.php";
-include_once __DIR__ . "/../layout/head.php";
 
 $id = $_GET["id"] ?? null;
-if (!$id) { header("Location: /views/tutorials/index.php"); exit; }
-
-
+if (!$id) {
+    header("Location: /views/tutorials/index.php");
+    exit;
+}
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
-<main class="form-main">
-    <h2>Editar tutorial</h2>
-    <p style="color:red;" id="resultat"></p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/modificar.css">
+    <title>BioChistera</title>
+</head>
 
-    <form>
-        <div>
-            <label for="titol">Títol *</label>
-            <input type="text" id="titol" required>
-        </div>
+<body>
+    <?php include_once '../layout/header.php'; ?>
 
-        <div>
-            <label for="categoria">Categoria *</label>
-            <select id="categoria" required>
-                <option value="">Tria una categoria</option>
-                <option value="Magia">Màgia</option>
-                <option value="Circ">Circ</option>
-                <option value="Clown">Clown</option>
-            </select>
-        </div>
+    <main class="form-main">
+        <h2>Editar tutorial</h2>
+        <p style="color:red;" id="resultat"></p>
 
-        <div>
-            <label for="subcategoria">Subcategoria</label>
-            <input type="text" id="subcategoria">
-        </div>
+        <form>
+            <div>
+                <label for="nom">Títol *</label>
+                <input type="text" id="nom" required>
+            </div>
 
-        <div>
-            <label for="descripcio">Descripció</label>
-            <textarea id="descripcio" rows="4"></textarea>
-        </div>
+            <div>
+                <label for="categoria">Categoria *</label>
+                <select id="categoria" required>
+                    <option value="">Tria una categoria</option>
+                    <option value="Magia">Màgia</option>
+                    <option value="Circ">Circ</option>
+                    <option value="Clown">Clown</option>
+                </select>
+            </div>
 
-        <div>
-            <label for="durada">Durada (minuts) *</label>
-            <input type="number" id="durada" required min="1">
-        </div>
+            <div>
+                <label for="subcategoria">Subcategoria</label>
+                <input type="text" id="subcategoria">
+            </div>
 
-        <div>
-            <label for="video_url">URL del vídeo *</label>
-            <input type="url" id="video_url" required>
-        </div>
+            <div>
+                <label for="descripcio">Descripció</label>
+                <textarea id="descripcio" rows="4"></textarea>
+            </div>
 
-        <button class="submit" type="submit">Guardar canvis →</button>
-    </form>
-</main>
+            <div>
+                <label for="durada">Durada (minuts)</label>
+                <input type="number" id="durada" min="0">
+            </div>
 
-<script>
-    const id = <?= json_encode($id) ?>;
+            <div>
+                <label for="url">URL del vídeo *</label>
+                <input type="url" id="url" required>
+            </div>
 
-    async function carregarTutorial() {
-        const res = await fetch(`http://localhost:3001/tutorials/${id}`);
-        const t = await res.json();
+            <button class="submit" type="submit">Guardar canvis →</button>
+        </form>
+    </main>
 
-        if (t.id_usuari !== payload.id && payload.rol !== "admin") {
-            window.location.assign("index.php");
-            return;
-        }
+    <script>
+        let id_usuari = null;
 
-        document.getElementById("titol").value        = t.titol ?? "";
-        document.getElementById("categoria").value    = t.categoria ?? "";
-        document.getElementById("subcategoria").value = t.subcategoria ?? "";
-        document.getElementById("descripcio").value   = t.descripcio ?? "";
-        document.getElementById("durada").value       = t.durada_minuts ?? "";
-        document.getElementById("video_url").value    = t.video_url ?? "";
-    }
+        const id = <?= json_encode($id) ?>;
 
-    function validar(titol, categoria, durada, video_url) {
-        if (!titol)     return "El títol és obligatori.";
-        if (titol.length < 3) return "El títol ha de tenir mínim 3 caràcters.";
-        if (!categoria) return "Tria una categoria.";
-        if (!durada || durada < 1) return "La durada ha de ser un número positiu.";
-        if (!video_url) return "La URL del vídeo és obligatòria.";
-        if (!video_url.startsWith("http")) return "La URL no és vàlida.";
-        return null;
-    }
+        async function carregarTutorial() {
+            const res = await fetch(`http://localhost:3001/tutorials/${id}`);
 
-    document.querySelector("form").addEventListener("submit", async (e) => {
-        e.preventDefault();
+            if (!res.ok) {
+                window.location.assign("index.php");
+                return;
+            }
+            tutorial = await res.json();
+            id_usuari = tutorial.id_usuari
 
-        const titol        = document.getElementById("titol").value.trim();
-        const categoria    = document.getElementById("categoria").value;
-        const subcategoria = document.getElementById("subcategoria").value.trim();
-        const descripcio   = document.getElementById("descripcio").value.trim();
-        const durada       = parseInt(document.getElementById("durada").value);
-        const video_url    = document.getElementById("video_url").value.trim();
-        const resultat     = document.getElementById("resultat");
-
-        const error = validar(titol, categoria, durada, video_url);
-        if (error) { resultat.textContent = error; return; }
-
-        try {
-            const res = await fetch(`http://localhost:3001/tutorials/${id}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ titol, categoria, subcategoria, descripcio, durada_minuts: durada, video_url })
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                window.location.assign("/views/user/paginaUsuari.php");
-            } else {
-                resultat.textContent = data.error;
+            if (tutorial.id_usuari !== payload.id && payload.rol !== "admin") {
+                window.location.assign("index.php");
+                return;
             }
 
-        } catch (err) {
-            resultat.textContent = "Error de connexió.";
-            console.error(err);
+            document.getElementById("nom").value = tutorial.nom ?? "";
+            document.getElementById("categoria").value = tutorial.categoria ?? "";
+            document.getElementById("subcategoria").value = tutorial.subcategoria ?? "";
+            document.getElementById("descripcio").value = tutorial.descripcio ?? "";
+            document.getElementById("durada").value = tutorial.durada ?? "";
+            document.getElementById("url").value = tutorial.url ?? "";
         }
-    });
 
-    carregarTutorial();
-</script>
+        function validar(nom, categoria, url) {
+            if (!nom) return "El títol és obligatori.";
+            if (nom.length < 3) return "El títol ha de tenir mínim 3 caràcters.";
+            if (!categoria) return "Tria una categoria.";
+            if (!url) return "La URL del vídeo és obligatòria.";
+            return null;
+        }
 
-<?php include_once __DIR__ . "/../layout/footer.html"; ?>
+        document.querySelector("form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const nom = document.getElementById("nom").value.trim();
+            const categoria = document.getElementById("categoria").value;
+            const subcategoria = document.getElementById("subcategoria").value.trim();
+            const descripcio = document.getElementById("descripcio").value.trim();
+            const durada = parseInt(document.getElementById("durada").value) || 0;
+            const url = document.getElementById("url").value.trim();
+            const resultat = document.getElementById("resultat");
+
+            const error = validar(nom, categoria, url);
+            if (error) {
+                resultat.textContent = error;
+                return;
+            }
+
+            try {
+                const res = await fetch(`http://localhost:3001/tutorials/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nom,
+                        categoria,
+                        subcategoria,
+                        descripcio,
+                        durada,
+                        url,
+                        id_usuari
+                    })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    window.location.assign("/views/tutorials/index.php");
+                } else {
+                    resultat.textContent = data.error;
+                }
+
+            } catch (err) {
+                resultat.textContent = "Error de connexió.";
+                console.error(err);
+            }
+        });
+
+        carregarTutorial();
+    </script>
+
+    <?php include_once __DIR__ . "/../layout/footer.html"; ?>
 </body>
+
 </html>

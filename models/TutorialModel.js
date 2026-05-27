@@ -12,11 +12,11 @@ export const getByCategoria = (db, tipus) =>
     db.prepare("SELECT * FROM tutorials WHERE categoria = ?").all(tipus);
 
 export const crear = (db, dades) => {
-    const { titol, categoria, nivell, durada_minuts, video_url, descripcio, id_usuari } = dades;
+    const { titol, categoria, durada_minuts, video_url, descripcio, id_usuari } = dades;
     const result = db.prepare(`
-        INSERT INTO tutorials (titol, categoria, nivell, durada_minuts, video_url, descripcio, id_usuari, data_publicacio, aprovada)
+        INSERT INTO tutorials (titol, categoria, durada_minuts, video_url, descripcio, id_usuari, data_publicacio, aprovada)
         VALUES (?, ?, ?, ?, ?, ?, ?, DATE('now'), 0)
-    `).run(titol, categoria, nivell, durada_minuts, video_url, descripcio, id_usuari);
+    `).run(titol, categoria, durada_minuts, video_url, descripcio, id_usuari);
     return result.lastInsertRowid;
 };
 
