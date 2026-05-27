@@ -79,3 +79,28 @@ h1 {
     border-color: var(--or);
     color: var(--or);
 }
+.titol_comprar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+#comprar {
+    background: transparent;
+    color: var(--or);
+    border: 1px solid var(--or);
+    padding: 0.65rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+#comprar:hover {
+    background: var(--or);
+    color: var(--fons);
+    transform: translateY(-1px);
+}

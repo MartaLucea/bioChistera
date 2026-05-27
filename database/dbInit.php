@@ -7,15 +7,15 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->exec("DROP TABLE IF EXISTS tutorials");
 $db->exec("DROP TABLE IF EXISTS usuaris");
 $db->exec("DROP TABLE IF EXISTS productes");
-
+$db->exec("DROP TABLE IF EXISTS compres");
 $db->exec("
 CREATE TABLE IF NOT EXISTS usuaris (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom TEXT NOT NULL UNIQUE,
     contrassenya TEXT NOT NULL,
-    email TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
     rol TEXT DEFAULT 'usuari'
-    );
+);
 ");
 
 $db->exec("
@@ -26,10 +26,13 @@ CREATE TABLE IF NOT EXISTS productes (
     subcategoria TEXT,
     descripcio TEXT,
     imatge TEXT,
-    id_usuari INTEGER,
-    data_publicacio TEXT,
+    id_usuari INTEGER NOT NULL,
+    data_publicacio TEXT DEFAULT CURRENT_TIMESTAMP,
     donacio TEXT DEFAULT 'si',
-    preu REAL DEFAULT 0
+    preu REAL DEFAULT 0,
+    comprat INTEGER DEFAULT 0,
+
+    FOREIGN KEY (id_usuari) REFERENCES usuaris(id)
 );
 ");
 
@@ -42,8 +45,22 @@ CREATE TABLE IF NOT EXISTS tutorials (
     descripcio TEXT,
     durada_minuts INTEGER,
     video_url TEXT,
-    id_usuari INTEGER,
-    data_publicacio TEXT
+    id_usuari INTEGER NOT NULL,
+    data_publicacio TEXT DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_usuari) REFERENCES usuaris(id)
+);
+");
+
+$db->exec("
+CREATE TABLE IF NOT EXISTS compres (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuari INTEGER NOT NULL,
+    id_producte INTEGER NOT NULL,
+    data_compra TEXT DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_usuari) REFERENCES usuaris(id),
+    FOREIGN KEY (id_producte) REFERENCES productes(id)
 );
 ");
 

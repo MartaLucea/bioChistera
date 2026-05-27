@@ -1,6 +1,16 @@
 <?php
 require_once __DIR__ . "/../../proc/validar.php";
 
+$token = $_COOKIE["token"] ?? null;
+$userId = null;
+
+if ($token) {
+    $parts = explode(".", $token);
+    if (count($parts) === 3) {
+        $payload = json_decode(base64_decode($parts[1]), true);
+        $userId = $payload["id"] ?? null;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,13 +103,13 @@ require_once __DIR__ . "/../../proc/validar.php";
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        nom,
+                        titol: nom,
                         categoria,
                         subcategoria,
                         descripcio,
                         durada,
                         url,
-                        id_usuari: payload.id
+                        id_usuari: <?= json_encode($userId) ?>
                     })
                 });
 

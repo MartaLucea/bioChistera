@@ -49,3 +49,18 @@ export const obtenirProductesUsuari = (db, id) => {
     return ProducteModel.getByUsuari(db, id);
 };
 
+export const obtenirUsuariComprats = (db, id) => {
+    return ProducteModel.getComprats(db, id);
+};
+export const obtenirUsuariVenuts = (db, id) => {
+    return ProducteModel.getVenuts(db, id);
+};
+
+export const comprar = (db) => (req, res) => {
+    const { id_producte, id_usuari } = req.body;
+    if (!id_producte || !id_usuari)
+        return res.status(400).json({ error: "Falten camps obligatoris" });
+
+    const id = ProducteModel.comprar(db, req.body);
+    res.status(201).json({ id, message: "Producte comprat" });
+}

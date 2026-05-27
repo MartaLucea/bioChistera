@@ -26,20 +26,21 @@ app.post("/productes", ProducteController.crear(db));
 app.put("/productes/:id", ProducteController.actualitzar(db));
 app.delete("/producte/:id", ProducteController.eliminar(db));
 
+app.post("/comprar", ProducteController.comprar(db));
 
 app.get("/usuari/:id", (req, res) => {
 
     const id = Number(req.params.id);
-
-    const tutorials =
-        TutorialController.obtenirTutorialsUsuari(db, id);
-
-    const productes =
-        ProducteController.obtenirProductesUsuari(db, id);
+    const tutorials = TutorialController.obtenirTutorialsUsuari(db, id);
+    const productes = ProducteController.obtenirProductesUsuari(db, id);
+    const comprats = ProducteController.obtenirUsuariComprats(db, id);
+    const venuts = ProducteController.obtenirUsuariVenuts(db, id);
 
     res.json({
         tutorials,
-        productes
+        productes,
+        comprats,
+        venuts
     });
 });
 

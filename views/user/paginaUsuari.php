@@ -43,6 +43,16 @@ $payload = json_decode(base64_decode($parts[1]), true);
     </div>
     <div class="grid" id="llista-materials"></div>
 
+    <div class="section-header">
+      <h2>Productes comprats</h2>
+    </div>
+    <div class="grid" id="llista-comprats"></div>
+
+    <div class="section-header">
+      <h2>Productes venuts</h2>
+    </div>
+    <div class="grid" id="llista-venuts"></div>
+
   </div>
 </main>
 <script>
@@ -96,6 +106,29 @@ async function carregarUsuari() {
         </div>
       `).join('');
     }
+
+    const comprats = document.getElementById('llista-comprats');
+
+    if (tot.comprats.length) {
+      comprats.innerHTML = tot.comprats.map(c => `
+        <div class="card" onclick="window.location.href='../productes/detall.php?id=${c.id_producte}'">
+          <h3>${c.nom}</h3>
+          <p>${c.descripcio}</p>
+        </div>
+      `).join('');
+    }
+
+    const venuts = document.getElementById('llista-venuts');
+
+    if (tot.venuts.length) {
+      venuts.innerHTML = tot.venuts.map(v => `
+        <div class="card" onclick="window.location.href='../productes/detall.php?id=${v.id_producte}'">
+          <h3>${v.nom}</h3>
+          <p>${v.descripcio}</p>
+        </div>
+      `).join('');
+    }
+
 
   } catch (error) {
     console.error("Error:", error);
