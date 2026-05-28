@@ -78,8 +78,8 @@
                     <li class="nav-item nav-item--dropdown">
                         <a>Administrar ▼</a>
                         <ul class="nav-sub">
-                            <li><a href="/views/user/admin/adminTutorials.php">Tutorials</a></li>
-                            <li><a href="/views/user/admin/adminProductes.php">Productes</a></li>
+                            <li><a href="/views/user/admin/tutorials.php">Tutorials</a></li>
+                            <li><a href="/views/user/admin/productes.php">Productes</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>

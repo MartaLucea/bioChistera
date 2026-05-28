@@ -1,5 +1,16 @@
 <?php
-require_once __DIR__ . "/../../proc/validar.php";
+require_once __DIR__ . "/../auth/validar.php";
+
+$token = $_COOKIE["token"] ?? null;
+$userId = null;
+
+if ($token) {
+    $parts = explode(".", $token);
+    if (count($parts) === 3) {
+        $payload = json_decode(base64_decode($parts[1]), true);
+        $userId = $payload["id"] ?? null;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +64,7 @@ require_once __DIR__ . "/../../proc/validar.php";
 
             <div>
                 <label for="preu">Preu</label>
-                <input type="number" id="preu">
+                <input type="number" id="preu" disabled=true value=0>
             </div>
 
             <button class="submit" type="submit">Crear producte →</button>
@@ -99,6 +110,7 @@ require_once __DIR__ . "/../../proc/validar.php";
             }
 
             try {
+                console.log(<?= json_encode($userId) ?>);
                 const res = await fetch(`http://localhost:3001/productes`, {
                     method: "POST",
                     headers: {
@@ -109,7 +121,7 @@ require_once __DIR__ . "/../../proc/validar.php";
                         categoria,
                         descripcio,
                         imatge,
-                        id_usuari: payload.id,
+                        id_usuari: <?= json_encode($userId) ?>,
                         donacio,
                         preu,
                     })

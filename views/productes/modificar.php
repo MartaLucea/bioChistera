@@ -1,10 +1,22 @@
 <?php
-require_once __DIR__ . "/../../proc/validar.php";
+require_once __DIR__ . "/../auth/validar.php";
 
 $id = $_GET["id"] ?? null;
 if (!$id) {
     header("Location: /views/productes/index.php");
     exit;
+}
+
+$token = $_COOKIE["token"] ?? null;
+$userId = null;
+
+if ($token) {
+    $parts = explode(".", $token);
+    if (count($parts) === 3) {
+        $payload = json_decode(base64_decode($parts[1]), true);
+        $userId = $payload["id"] ?? null;
+        $userRol = $payload["rol"] ?? null;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -94,7 +106,7 @@ if (!$id) {
 
             id_usuari = p.id_usuari
 
-            if (p.id_usuari !== payload.id && payload.rol !== "admin") {
+            if (p.id_usuari !== <?= json_encode($userId) ?> && <?= json_encode($userRol) ?> !== "admin") {
                 window.location.assign("index.php");
                 return;
             }

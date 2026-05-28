@@ -1,0 +1,142 @@
+@import url('paletaColores.css');
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.hero {
+  background: var(--fons-2);
+  border: 1px solid var(--blau);
+  border-radius: var(--radi);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--blanc);
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  background: var(--fons-2);
+  border: 1px solid var(--blau);
+  border-radius: var(--radi);
+  padding: 12px 14px;
+
+  transition: 0.15s ease;
+}
+
+.card:hover {
+  transform: translateX(4px);
+  border-color: var(--blau-clar);
+  cursor: pointer;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-cat {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.cat-magia { background: #1a2570; color: #a0aaff; }
+.cat-clown { background: #3a1a00; color: var(--or); }
+.cat-circ  { background: #1a0028; color: #c084fc; }
+
+.card-date {
+  font-size: 0.7rem;
+  color: var(--text-suau);
+  white-space: nowrap;
+}
+
+.card-title,
+.card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--blanc);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-user {
+  font-size: 0.75rem;
+  color: var(--text-suau);
+  margin: 0;
+}
+
+.card-footer,
+.card-meta {
+  font-size: 0.75rem;
+  color: var(--text-suau);
+}
+
+.botons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.botons p {
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: var(--radi);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+}
+
+.botons p:first-child {
+  border: 1px solid var(--blau-clar);
+  color: var(--blau-clar);
+}
+
+.botons p:first-child:hover {
+  background: var(--blau);
+  color: var(--blanc);
+}
+
+.botons p:last-child {
+  border: 1px solid var(--vermell);
+  color: var(--vermell);
+}
+
+.botons p:last-child:hover {
+  background: #3a0015;
+  color: var(--blanc);
+}

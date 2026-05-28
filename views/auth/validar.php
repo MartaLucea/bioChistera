@@ -1,7 +1,7 @@
 <?php
 $payload = validarToken();
 if (!$payload) {
-    header("Location: views/auth/login.php");
+    header("Location: login.php");
     exit();
 }
 

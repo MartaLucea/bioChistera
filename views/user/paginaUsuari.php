@@ -1,13 +1,9 @@
 <?php
-require_once __DIR__ . "/../../proc/validar.php";
+require_once __DIR__ . "/../auth/validar.php";
 
 
 $token = $_COOKIE["token"];
 $parts = explode(".", $token);
-
-if (count($parts) !== 3) {
-  return null;
-}
 
 $payload = json_decode(base64_decode($parts[1]), true);
 ?>
@@ -122,7 +118,7 @@ async function carregarUsuari() {
 
     if (tot.venuts.length) {
       venuts.innerHTML = tot.venuts.map(v => `
-        <div class="card" onclick="window.location.href='../productes/detall.php?id=${v.id_producte}'">
+        <div class="card" onclick="window.location.href='../productes/detall.php?id=${v.id}'">
           <h3>${v.nom}</h3>
           <p>${v.descripcio}</p>
         </div>

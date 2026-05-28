@@ -1,12 +1,15 @@
 export const getById = (db, id) => {
-    const tutorial = db.prepare("SELECT * FROM tutorials WHERE id = ?").get(id);
-    if (!tutorial) return null;
-
-    const usuari = db.prepare("SELECT nom FROM usuaris WHERE id = ?").get(tutorial.id_usuari);
-    return { ...tutorial, usuari: usuari?.nom ?? null };
+    return db.prepare(`
+        SELECT t.*, u.nom AS usuari
+        FROM tutorials t
+        JOIN usuaris u ON u.id = t.id_usuari
+        WHERE t.id = ?
+    `).get(id);
 };
-
-export const getAll = (db) => db.prepare("SELECT * FROM tutorials").all();
+export const getAll = (db) =>
+    db.prepare(` SELECT t.*, u.nom AS usuari_nom FROM tutorials t
+        JOIN usuaris u ON u.id = t.id_usuari
+    `).all();
 
 export const getByCategoria = (db, tipus) =>
     db.prepare("SELECT * FROM tutorials WHERE categoria = ?").all(tipus);

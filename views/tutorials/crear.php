@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../proc/validar.php";
+require_once __DIR__ . "/../auth/validar.php";
 
 $token = $_COOKIE["token"] ?? null;
 $userId = null;

@@ -1,5 +1,8 @@
-export const getAll = (db) => db.prepare("SELECT * FROM productes WHERE comprat = 0").all();
-
+export const getAll = (db) =>
+    db.prepare(` SELECT p.*, u.nom AS usuari_nom FROM productes p
+        JOIN usuaris u ON u.id = p.id_usuari WHERE p.comprat = 0
+    `).all();
+    
 export const getByCategoria = (db, tipus) =>
     db.prepare("SELECT * FROM productes WHERE categoria = ? AND comprat = 0").all(tipus);
 
@@ -12,11 +15,11 @@ export const getById = (db, id) => {
 };
 
 export const crear = (db, dades) => {
-    const { nom, categoria, descripcio, preu, id_usuari, donacio } = dades;
+    const { nom, categoria, descripcio, imatge, preu, id_usuari, donacio } = dades;
     const result = db.prepare(`
-        INSERT INTO productes (nom, categoria, descripcio, id_usuari, donacio, preu, data_publicacio)
-        VALUES (?, ?, ?, ?, ?, ?,?, DATE('now'))
-    `).run(nom, categoria, descripcio, id_usuari, donacio, preu );
+        INSERT INTO productes (nom, categoria, descripcio, id_usuari, donacio, preu, imatge, data_publicacio)
+        VALUES (?, ?, ?, ?, ?, ?, ?, DATE('now'))
+    `).run(nom, categoria, descripcio, id_usuari, donacio, preu, imatge );
     return result.lastInsertRowid;
 };
 
