@@ -32,12 +32,12 @@ if ($token) {
         <form>
             <div>
                 <label for="nom">Títol *</label>
-                <input type="text" id="nom" required>
+                <input type="text" id="nom">
             </div>
 
             <div>
                 <label for="categoria">Categoria *</label>
-                <select id="categoria" required>
+                <select id="categoria">
                     <option value="">Tria una categoria</option>
                     <option value="Magia">Màgia</option>
                     <option value="Circ">Circ</option>
@@ -56,8 +56,8 @@ if ($token) {
             </div>
 
             <div>
-                <label for="url">URL del vídeo *</label>
-                <input type="url" id="url" required>
+                <label for="url">URL del vídeo</label>
+                <input type="url" id="url">
             </div>
 
             <button class="submit" type="submit">Crear tutorial →</button>
@@ -65,43 +65,78 @@ if ($token) {
     </main>
 
     <script>
-        function validar(nom, categoria, url, durada) {
-            if (!nom) return "El títol és obligatori.";
-            if (nom.length < 3) return "El títol ha de tenir mínim 3 caràcters.";
-            if (!categoria) return "Tria una categoria.";
-            if (!url) return "La URL del vídeo és obligatòria.";
-            if (durada < 0 || isNaN(durada)) return "La durada no pot ser negativa.";
-            return null;
+        const form = document.getElementById("tutorialForm");
+        
+        function netejarErrors() {
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = "");
+            document.querySelectorAll('input, select').forEach(el => el.classList.remove('error-input'));
+            document.getElementById("resultat-global").textContent = "";
         }
 
-        document.querySelector("form").addEventListener("submit", async (e) => {
+        function validarFormulari(dades) {
+            let errors = 0;
+
+            if (dades.nom.length < 3) {
+                marcarError("nom", "El títol ha de tenir almenys 3 caràcters.");
+                errors++;
+            }
+
+            if (!dades.categoria) {
+                marcarError("categoria", "Has de seleccionar una categoria.");
+                errors++;
+            }
+
+            if (dades.durada <= 0 || isNaN(dades.durada)) {
+                marcarError("durada", "La durada ha de ser un número positiu.");
+                errors++;
+            }
+
+            const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+            if (!urlPattern.test(dades.url)) {
+                marcarError("url", "Introdueix una adreça URL vàlida (http://...).");
+                errors++;
+            }
+
+            return errors === 0;
+        }
+
+        function marcarError(id, missatge) {
+            const input = document.getElementById(id);
+            const span = document.getElementById(`error-${id}`);
+            input.classList.add('error-input');
+            span.textContent = missatge;
+        }
+
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
+            netejarErrors();
 
-            const nom = document.getElementById("nom").value.trim();
-            const categoria = document.getElementById("categoria").value;
-            const descripcio = document.getElementById("descripcio").value.trim();
-            const durada = parseInt(document.getElementById("durada").value) || 0;
-            const url = document.getElementById("url").value.trim();
-            const resultat = document.getElementById("resultat");
+            const dades = {
+                nom: document.getElementById("nom").value.trim(),
+                categoria: document.getElementById("categoria").value,
+                descripcio: document.getElementById("descripcio").value.trim(),
+                durada: parseInt(document.getElementById("durada").value),
+                url: document.getElementById("url").value.trim()
+            };
 
-            const error = validar(nom, categoria, url, durada);
-            if (error) {
-                resultat.textContent = error;
+            const esValid = validarFormulari(dades);
+
+            if (!esValid) {
+                document.getElementById("resultat-global").textContent = "Si us plau, corregeix els errors del formulari.";
+                document.getElementById("resultat-global").style.color = "red";
                 return;
             }
 
             try {
                 const res = await fetch(`http://localhost:3001/tutorials`, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        titol: nom,
-                        categoria,
-                        descripcio,
-                        durada_minuts: durada,
-                        video_url: url,
+                        titol: dades.nom,
+                        categoria: dades.categoria,
+                        descripcio: dades.descripcio,
+                        durada_minuts: dades.durada,
+                        video_url: dades.url,
                         id_usuari: <?= json_encode($userId) ?>
                     })
                 });
@@ -109,13 +144,16 @@ if ($token) {
                 const data = await res.json();
 
                 if (res.ok) {
-                    window.location.assign("/views/tutorials/index.php");
+                    document.getElementById("resultat-global").style.color = "green";
+                    document.getElementById("resultat-global").textContent = "Tutorial creat amb èxit! Redirigint...";
+                    setTimeout(() => window.location.assign("/views/tutorials/index.php"), 1500);
                 } else {
-                    resultat.textContent = data.error;
+                    document.getElementById("resultat-global").style.color = "red";
+                    document.getElementById("resultat-global").textContent = data.error || "Error en guardar.";
                 }
 
             } catch (err) {
-                resultat.textContent = "Error de connexió.";
+                document.getElementById("resultat-global").textContent = "Error crític de connexió.";
                 console.error(err);
             }
         });

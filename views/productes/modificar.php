@@ -71,7 +71,7 @@ if ($token) {
 
             <div>
                 <label for="preu">Preu</label>
-                <input type="number" id="preu">
+                <input type="number" id="preu" value="0">
             </div>
 
             <button class="submit" type="submit">Guardar canvis →</button>
@@ -119,12 +119,31 @@ if ($token) {
             document.getElementById("preu").value = p.preu ?? "";
         }
 
-        function validar(nom, categoria, donacio, preu) {
-            if (!nom) return "El nom és obligatori.";
-            if (nom.length < 3) return "El nom ha de tenir mínim 3 caràcters.";
-            if (!categoria) return "Tria una categoria.";
-            if (!donacio) return "Tria si el producte és donació.";
-            if (donacio === "no" && preu <= 0) return "Si no és donació necessita un preu";
+        function validar(dades) {
+            const { nom, categoria, donacio, preu, imatge } = dades;
+
+            if (!nom || nom.length < 3) {
+                return "El nom és obligatori i ha de tenir almenys 3 caràcters.";
+            }
+            
+            if (!categoria) {
+                return "Has de seleccionar una categoria.";
+            }
+
+            if (donacio === "no") {
+                if (isNaN(preu) || preu <= 0) {
+                    return "Si no és una donació, el preu ha de ser superior a 0.";
+                }
+            }
+
+            if (imatge !== "") {
+                try {
+                    new URL(imatge);
+                } catch (_) {
+                    return "La URL de la imatge no és vàlida.";
+                }
+            }
+
             return null;
         }
 

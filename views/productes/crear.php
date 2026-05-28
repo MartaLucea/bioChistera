@@ -30,13 +30,13 @@ if ($token) {
 
         <form>
             <div>
-                <label for="nom">Nom *</label>
+                <label for="nom">Nom</label>
                 <input type="text" id="nom" required>
             </div>
 
             <div>
-                <label for="categoria">Categoria *</label>
-                <select id="categoria" required>
+                <label for="categoria">Categoria</label>
+                <select id="categoria">
                     <option value="">Tria una categoria</option>
                     <option value="Magia">Màgia</option>
                     <option value="Circ">Circ</option>
@@ -55,8 +55,8 @@ if ($token) {
             </div>
 
             <div>
-                <label for="donacio">Donació *</label>
-                <select id="donacio" required>
+                <label for="donacio">Donació</label>
+                <select id="donacio">
                     <option value="si">Sí</option>
                     <option value="no">No</option>
                 </select>
