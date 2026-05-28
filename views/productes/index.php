@@ -55,13 +55,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const botonsPreu = document.querySelectorAll(".price-tab");
 
-    // CERCA
     document.getElementById('faq-search').addEventListener('input', (e) => {
         textActual = e.target.value.toLowerCase().trim();
         aplicarFiltres();
     });
 
-    // CATEGORIES
     botonsCat.forEach(boto => {
         boto.addEventListener("click", () => {
 

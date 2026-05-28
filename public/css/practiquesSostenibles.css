@@ -1,6 +1,11 @@
 @import url('paletaColores.css');
 
-/* ===== STATS BANNER ===== */
+
+.ods-hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .prac-stats {
     background-color: var(--fons-2);
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -38,7 +43,6 @@
     font-family: Georgia, serif;
 }
 
-/* ===== SECCIONS DE PRÀCTIQUES ===== */
 .practiques {
     padding: 3.5rem 0;
 }
@@ -49,7 +53,6 @@
     padding: 0 1.5rem;
 }
 
-/* ===== CATEGORIA ===== */
 .prac-categoria {
     margin-bottom: 3rem;
 }
@@ -70,14 +73,13 @@
     font-size: 1.4rem;
 }
 
-/* ===== GRID DE TARGETES ===== */
+
 .prac-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.2rem;
 }
 
-/* ===== TARGETA ===== */
 .prac-card {
     background-color: var(--fons-2);
     border-radius: var(--radi);
@@ -153,7 +155,6 @@
     border: 1px solid rgba(74, 95, 212, 0.3);
 }
 
-/* ===== REFLEXIÓ FINAL ===== */
 .prac-reflexio {
     padding: 0 0 4rem;
 }

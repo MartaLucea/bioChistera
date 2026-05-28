@@ -1,35 +1,40 @@
 @import url('includes.css');
 
 :root {
-  --fons:        #07080f;
-  --fons-2:      #161830;
-  --blau:        #1a2570;
-  --blau-clar:   #4a5fd4;
-  --vermell:     #e8234a;
-  --or:          #f5c842;
-  --or-fosc:     #c49a20;
-  --lilaClar:    #eeeaff;
-  --text-suau:   #7a74aa;
-  --blanc:       #ffffff;
-  --text:        #d8d2ff;
-  --radi:        10px;
+    --fons: #07080f;
+    --fons-2: #161830;
+    --blau: #1a2570;
+    --blau-clar: #4a5fd4;
+    --vermell: #e8234a;
+    --or: #f5c842;
+    --or-fosc: #c49a20;
+    --lilaClar: #eeeaff;
+    --text-suau: #7a74aa;
+    --blanc: #ffffff;
+    --text: #d8d2ff;
+    --radi: 10px;
 }
 
-  body.light {
-    --fons:        #faf8ff;
-    --fons-2:      #f0ecff;
-    --blau:        #11195E;
-    --blau-clar:   #3D4DB0;
-    --vermell:     #C41E3A;
-    --or:          #D4B138;
-    --or-fosc:     #a88520;
-    --lilaClar:    #e8e2f7;
-    --text-suau:   #6B63A8;
-    --blanc:       #ffffff;
-    --text:        #1a1547;
-  }
+body.light-mode {
+    --fons: #f8f7ff;
+    --fons-2: #e7e2ff;
+    --blau: #8ea2ff;
+    --blau-clar: #1a2570;
+    --vermell: #e8234a;
+    --or: #c49a20;
+    --or-fosc: #f5c842;
+    --lilaClar: #2a2344;
+    --text-suau: rgb(77, 73, 102);
+    --blanc: #0f1220;
+    --text: #1b1e2e;
+    --radi: 10px;
+    --shadow: rgba(26, 37, 112, 0.1);
+}
 
-*, *::before, *::after {
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -42,6 +47,14 @@ body {
     font-size: 16px;
     line-height: 1.7;
 }
+
+body.light-mode .article,
+body.light-mode .card,
+body.light-mode .prac-stat {
+    box-shadow: 0 4px 12px var(--shadow);
+    border: 1px solid rgba(26, 37, 112, 0.05);
+}
+
 
 .ods-hero__breadcrumb a {
     color: var(--or);
@@ -68,6 +81,9 @@ body {
     font-size: 1rem;
     outline: none;
     transition: border-color 0.2s;
+    /* Adaptació de l'input al mode clar/fosc */
+    background-color: var(--fons);
+    color: var(--text);
 }
 
 #faq-tabs {
@@ -78,19 +94,21 @@ body {
     padding: 1.5rem 1rem 0;
 }
 
-.faq-tab.actiu, .faq-tab:hover {
-    background: var(--color-primary, --blau);
-    border-color: var(--color-primary, --blau);
-    color: #fff;
-}
-
 .faq-tab {
     padding: 0.4rem 1.1rem;
     border-radius: 999px;
-    border: 2px solid #ccc;
-    background: #fff;
+    border: 2px solid var(--text-suau);
+    background: var(--fons-2);
+    color: var(--text);
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.2s;
+}
+
+.faq-tab.actiu,
+.faq-tab:hover {
+    background: var(--blau-clar);
+    border-color: var(--blau-clar);
+    color: #fff;
 }

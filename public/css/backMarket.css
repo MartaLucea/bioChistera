@@ -1,320 +1,112 @@
-@import url('paletaColores.css');
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--fons-2);
-  border-bottom: 0.5px solid var(--blau);
-  padding: 0.85rem 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+@import url('paletaColores.css'); 
+
+.investigacio-backmarket-container {
+    width: 100%;
+    background: transparent;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
 }
 
-.nav-logo {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--or);
-  text-decoration: none;
-  letter-spacing: 0.5px;
+.report-grid {
+    display: flex;
+    min-height: 600px;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.25rem;
-  margin: 0;
-  padding: 0;
+.report-sidebar {
+    width: 350px;
+    background: rgba(7, 8, 15, 0.4);
+    padding: 40px;
+    border-right: 1px solid var(--blau);
 }
 
-.nav-links a {
-  font-size: 14px;
-  color: var(--text-suau);
-  text-decoration: none;
-  transition: color 0.2s;
+.info-box {
+    margin-bottom: 40px;
 }
 
-.nav-links a:hover,
-.nav-links a.nav-active {
-  color: var(--or);
+.info-box h3 {
+    color: var(--or);
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
-/* --- LAYOUT PRINCIPAL --- */
-.bm-page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
-  color: var(--text);
+.bcorp-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--or);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
 }
 
-/* --- HERO --- */
-.bm-hero {
-  background: var(--fons-2);
-  border: 0.5px solid var(--blau);
-  border-radius: var(--radi);
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
+.bcorp-circle .number { font-size: 1.8rem; font-weight: bold; color: var(--or); }
+.bcorp-circle .label { font-size: 0.6rem; color: var(--text-suau); }
+
+.bcorp-list { list-style: none; padding: 0; font-size: 0.9rem; }
+.bcorp-list li { margin-bottom: 10px; color: var(--text); }
+
+.report-main {
+    flex: 1;
+    padding: 50px;
+    background: rgba(26, 37, 112, 0.1);
 }
 
-.bm-logo-box {
-  width: 64px;
-  height: 64px;
-  background: var(--vermell);
-  border-radius: var(--radi);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.report-section {
+    margin-bottom: 40px;
 }
 
-.bm-logo-box span {
-  color: var(--blanc);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  text-align: center;
-  line-height: 1.3;
+.report-section h2 {
+    color: var(--or);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
 }
 
-.bm-hero-text h1 {
-  font-size: 24px;
-  font-weight: 500;
-  color: var(--blanc);
-  margin: 0 0 4px;
+.report-section p {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 15px;
 }
 
-.bm-hero-text p {
-  font-size: 14px;
-  color: var(--text-suau);
-  margin: 0 0 10px;
-  line-height: 1.5;
+.table-wrap {
+    background: var(--fons);
+    border-radius: var(--radi);
+    overflow: hidden;
+    margin-top: 20px;
 }
 
-.bm-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.bm-tag {
-  display: inline-block;
-  background: var(--blau);
-  color: var(--lilaClar);
-  font-size: 11px;
-  padding: 3px 10px;
-  border-radius: 20px;
+th {
+    background: var(--blau);
+    color: var(--or-fosc);
+    text-align: left;
+    padding: 15px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
-/* --- STATS --- */
-.bm-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 12px;
-  margin-bottom: 1.5rem;
+td {
+    padding: 15px;
+    border-bottom: 1px solid var(--fons-2);
+    font-size: 0.95rem;
 }
 
-.bm-stat {
-  background: var(--fons-2);
-  border: 0.5px solid var(--blau);
-  border-radius: var(--radi);
-  padding: 1rem 1.25rem;
-  text-align: center;
+.highlight-v {
+    color: var(--vermell);
+    font-weight: bold;
 }
 
-.bm-stat .val {
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--or);
-  display: block;
-}
-
-.bm-stat .lbl {
-  font-size: 12px;
-  color: var(--text-suau);
-  margin-top: 4px;
-  line-height: 1.4;
-}
-
-/* --- TÍTOL DE SECCIÓ --- */
-.bm-section-title {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--blau-clar);
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  margin: 0 0 0.75rem;
-}
-
-/* --- CARDS D'ACCIONS --- */
-.bm-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-  margin-bottom: 1.5rem;
-}
-
-.bm-card {
-  background: var(--fons-2);
-  border: 0.5px solid var(--blau);
-  border-radius: var(--radi);
-  padding: 1rem 1.25rem;
-}
-
-.bm-card-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.bm-accent-red    { background: rgba(232, 35, 74, 0.15); }
-.bm-accent-blue   { background: rgba(74, 95, 212, 0.18); }
-.bm-accent-gold   { background: rgba(245, 200, 66, 0.15); }
-.bm-accent-purple { background: rgba(238, 234, 255, 0.08); }
-
-.bm-card h3 {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--blanc);
-  margin: 0 0 6px;
-}
-
-.bm-card p {
-  font-size: 13px;
-  color: var(--text-suau);
-  margin: 0;
-  line-height: 1.6;
-}
-
-/* --- STAKEHOLDERS --- */
-.bm-stakeholders {
-  background: var(--fons-2);
-  border: 0.5px solid var(--blau);
-  border-radius: var(--radi);
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.bm-stakeholders ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 8px;
-}
-
-.bm-stakeholders li {
-  font-size: 13px;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  background: var(--fons);
-  border-radius: 6px;
-  border: 0.5px solid var(--blau);
-}
-
-.bm-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* --- TAULA DE MÈTRIQUES --- */
-.bm-measure {
-  background: var(--fons-2);
-  border: 0.5px solid var(--blau);
-  border-radius: var(--radi);
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.bm-measure-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 8px 0;
-  border-bottom: 0.5px solid var(--blau);
-}
-
-.bm-measure-row:last-child {
-  border-bottom: none;
-}
-
-.bm-measure-row .metric-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--lilaClar);
-  min-width: 170px;
-  flex-shrink: 0;
-}
-
-.bm-measure-row .metric-val {
-  font-size: 13px;
-  color: var(--text-suau);
-  line-height: 1.6;
-}
-
-/* --- B CORP BANNER --- */
-.bm-bcorp {
-  background: rgba(74, 95, 212, 0.1);
-  border: 0.5px solid var(--blau-clar);
-  border-radius: var(--radi);
-  padding: 1rem 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.bm-bcorp-badge {
-  width: 40px;
-  height: 40px;
-  background: var(--blau-clar);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--blanc);
-  flex-shrink: 0;
-}
-
-.bm-bcorp p {
-  font-size: 13px;
-  color: var(--text);
-  margin: 0;
-  line-height: 1.6;
-}
-
-.bm-bcorp strong {
-  color: var(--lilaClar);
-}
-
-/* --- FONT / CRÈDITS --- */
-.bm-source {
-  font-size: 12px;
-  color: var(--text-suau);
-  text-align: right;
-  border-top: 0.5px solid var(--blau);
-  padding-top: 0.75rem;
-}
-
-.bm-source a {
-  color: var(--blau-clar);
-  text-decoration: none;
-}
-
-.bm-source a:hover {
-  color: var(--or);
+tfoot td {
+    font-size: 0.75rem;
+    color: var(--text-suau);
+    text-align: right;
+    border: none;
 }

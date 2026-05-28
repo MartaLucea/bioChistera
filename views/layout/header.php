@@ -35,10 +35,6 @@
             </li>
 
             <li class="nav-item">
-                <a href="/views/static/economiaCircular.html">Economia circular</a>
-            </li>
-
-            <li class="nav-item">
                 <a href="/views/static/preguntesFrequens.php">FAQ</a>
             </li>
             <?php
@@ -80,11 +76,51 @@
                         <ul class="nav-sub">
                             <li><a href="/views/user/admin/tutorials.php">Tutorials</a></li>
                             <li><a href="/views/user/admin/productes.php">Productes</a></li>
+                            <li><a href="/views/user/admin/usuaris.php">Usuaris</a></li>                        
                         </ul>
                     </li>
                 <?php endif; ?>
 
             <?php endif; ?>
+
+            <li class="nav-item">
+                <button id="theme-toggle" class="theme-btn" aria-label="Canviar mode">
+                    <span class="icon-sun">☀︎</span>
+                    <span class="icon-moon" style="display:none;">⏾</span>
+                    <script>
+                        const btn = document.getElementById('theme-toggle');
+                        const sun = btn.querySelector('.icon-sun');
+                        const moon = btn.querySelector('.icon-moon');
+
+                        console.log(document.body.classList.value)
+                        
+                        function actualitzaIcones() {
+                            if (document.body.classList.contains('light-mode')) {
+                                sun.style.display = 'none';
+                                moon.style.display = 'inline';
+                            } else {
+                                sun.style.display = 'inline';
+                                moon.style.display = 'none';
+                            }
+                        }
+
+                        btn.addEventListener('click', () => {
+                            document.body.classList.toggle('light-mode');
+
+                            const esClar = document.body.classList.contains('light-mode');
+
+                            localStorage.setItem('tema', esClar ? 'clar' : 'fosc');
+
+                            actualitzaIcones();
+                        });
+
+                        if (localStorage.getItem('tema') === 'clar') {
+                            document.body.classList.add('light-mode');
+                        }
+                        actualitzaIcones();
+                </script>
+                </button>
+            </li>
         </ul>
     </nav>
 

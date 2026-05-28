@@ -2,7 +2,7 @@
 
 $db = new PDO('sqlite:bioChistera.db');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+$db->exec("PRAGMA foreign_keys = ON;");
 
 $db->exec("DROP TABLE IF EXISTS tutorials");
 $db->exec("DROP TABLE IF EXISTS usuaris");
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS productes (
     preu REAL DEFAULT 0,
     comprat INTEGER DEFAULT 0,
 
-    FOREIGN KEY (id_usuari) REFERENCES usuaris(id)
+    FOREIGN KEY (id_usuari) REFERENCES usuaris(id) ON DELETE CASCADE
 );
 ");
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS tutorials (
     id_usuari INTEGER NOT NULL,
     data_publicacio TEXT DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (id_usuari) REFERENCES usuaris(id)
+    FOREIGN KEY (id_usuari) REFERENCES usuaris(id) ON DELETE CASCADE
 );
 ");
 
@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS compres (
     id_producte INTEGER NOT NULL,
     data_compra TEXT DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (id_usuari) REFERENCES usuaris(id),
-    FOREIGN KEY (id_producte) REFERENCES productes(id)
+    FOREIGN KEY (id_usuari) REFERENCES usuaris(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_producte) REFERENCES productes(id) ON DELETE CASCADE
 );
 ");
 

@@ -45,9 +45,9 @@ if ($token) {
         </main>
         <script>
             const input = document.getElementById("contrasenya");
-            const btn = document.getElementById("togglePass");
+            const boton = document.getElementById("togglePass");
 
-            btn.addEventListener("click", () => {
+            boton.addEventListener("click", () => {
                 if (input.type === "password") {
                     input.type = "text";
                 } else {

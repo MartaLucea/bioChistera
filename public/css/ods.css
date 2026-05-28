@@ -196,6 +196,12 @@
 .flip-card-back--12 { background-color: #3d2c0e; border-left: 4px solid #BF8B2E; }
 .flip-card-back--17 { background-color: #0e1f3d; border-left: 4px solid #19486A; }
 
+body.light-mode .flip-card-back--3  { background-color: #c3e8c7; border-left: 4px solid #8ef375; }
+body.light-mode .flip-card-back--10  { background-color: #e8c3e6; border-left: 4px solid rgb(243, 117, 230); }
+body.light-mode .flip-card-back--12 { background-color: #e8e5c3; border-left: 4px solid #f3e275; }
+body.light-mode .flip-card-back--17  { background-color: #c3c8e8; border-left: 4px solid #75b0f3; }
+
+
 .flip-back__num {
     font-size: 2.5rem;
     font-family: Georgia, serif;
@@ -240,6 +246,12 @@
 .ods-detail-hero--10 { background: linear-gradient(135deg, #490043 60%, #ce0391 100%); }
 .ods-detail-hero--12 { background: linear-gradient(135deg, #492700 60%, #ce6f03 100%); }
 .ods-detail-hero--17 { background: linear-gradient(135deg, #000749 60%, #0311ce 100%); }
+
+body.light-mode .ods-detail-hero--3  { background: linear-gradient(135deg, #00ff22 60%, #aeffb6 100%); }
+body.light-mode .ods-detail-hero--10  { background: linear-gradient(135deg, #ff00ea 60%, #ffafe7 100%); }
+body.light-mode .ods-detail-hero--12  { background: linear-gradient(135deg, #ffbf00 60%, #ffeda3 100%); }
+body.light-mode .ods-detail-hero--17  { background: linear-gradient(135deg,  #7280f9 60%, #979eff 100%); }
+
 
 .ods-detail-hero__inner {
     display: flex;

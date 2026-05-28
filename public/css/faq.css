@@ -1,7 +1,7 @@
 @import url('paletaColores.css');
 
 #faq-hero {
-    color: #fff;
+    color: var(--blanc);
     text-align: center;
     padding: 4rem 1.5rem 3rem;
 }
@@ -18,7 +18,6 @@
     margin: 0 auto;
 }
 
-/* Search bar */
 #faq-search-wrap {
     display: flex;
     justify-content: center;

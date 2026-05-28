@@ -10,156 +10,106 @@
     <?php include_once '../layout/header.php'; ?>
 
     <main>
-
         <section class="ods-hero">
             <p class="ods-hero__breadcrumb"><a href="/index.php">Inici</a> › Pràctiques Sostenibles</p>
-            <h1>Com treballem de forma sostenible</h1>
+            <h1>Sostenibilitat en el Desenvolupament</h1>
             <p class="ods-hero__sub">
-                No n'hi ha prou amb parlar de sostenibilitat; cal practicar-la cada dia. Aquí recollim totes les decisions
-                que hem pres durant el desenvolupament de BioChistera per reduir el nostre impacte ambiental.
+                En el projecte BioChistera, la sostenibilitat no és només el tema de la web, sinó la base de com l'hem programat. 
+                Apliquem criteris d'eficiència digital per reduir la petjada de carboni del nostre codi.
             </p>
         </section>
 
         <section class="prac-stats">
-                <div class="prac-stats__grid">
-                    <div class="prac-stat">
-                        <span class="prac-stat__num">0</span>
-                        <span class="prac-stat__label">fulls impresos</span>
-                    </div>
-                    <div class="prac-stat">
-                        <span class="prac-stat__num">100%</span>
-                        <span class="prac-stat__label">codi net i optimitzat</span>
-                    </div>
-                    <div class="prac-stat">
-                        <span class="prac-stat__num">☀️🌙</span>
-                        <span class="prac-stat__label">mode clar/fosc disponible</span>
-                    </div>
-                    <div class="prac-stat">
-                        <span class="prac-stat__num">cloud</span>
-                        <span class="prac-stat__label">eines col·laboratives al núvol</span>
-                    </div>
+            <div class="prac-stats__grid">
+                <div class="prac-stat">
+                    <span class="prac-stat__num">0</span>
+                    <span class="prac-stat__label">Fulls de paper</span>
                 </div>
+                <div class="prac-stat">
+                    <span class="prac-stat__num">Async</span>
+                    <span class="prac-stat__label">Comunicació eficient</span>
+                </div>
+                <div class="prac-stat">
+                    <span class="prac-stat__num">OLED</span>
+                    <span class="prac-stat__label">Friendly Design</span>
+                </div>
+                <div class="prac-stat">
+                    <span class="prac-stat__num">API</span>
+                    <span class="prac-stat__label">REST optimitzada</span>
+                </div>
+            </div>
         </section>
 
         <section class="practiques">
             <div class="contenidor">
-                    <div class="prac-grid">
-
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                                <h3>Mode fosc per defecte</h3>
-                            </div>
-                            <p>La interfície de BioChistera s'ha dissenyat amb fons fosc com a opció per defecte.
-                            Les pantalles OLED i AMOLED apaguen els píxels negres completament, cosa que pot
-                            reduir el consum de bateria fins a un 60% en dispositius mòbils moderns.</p>
-                            <div class="prac-card__tag">Estalvi energètic</div>
+                <h2 class="prac-categoria__titol">RA5: Programació Web Eficient</h2>
+                <div class="prac-grid">
+                    <div class="prac-card">
+                        <div class="prac-card__header">
+                            <h3>Comunicació asíncrona (Fetch API)</h3>
                         </div>
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                                <h3>Imatges optimitzades</h3>
-                            </div>
-                            <p>Totes les imatges del projecte han estat comprimides abans de pujar-les al servidor.
-                            Hem reduït el pes sense pèrdua de qualitat visual apreciable, estalviant ample de banda
-                            a cada visita i reduint el temps de càrrega de les pàgines.</p>
-                            <div class="prac-card__tag">Pes de la web</div>
-                        </div>
-
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                                <h3>Codi net sense redundàncies</h3>
-                            </div>
-                            <p>Hem evitat duplicar lògica i hem reutilitzat components com el header i el footer
-                            mitjançant PHP <code>include</code>. Menys codi significa menys bytes a transferir,
-                            menys processament al servidor i menys consum d'energia per cada pàgina carregada.</p>
-                            <div class="prac-card__tag">Eficiència</div>
-                        </div>
-
+                        <p>Utilitzem <code>async/await</code> per fer peticions puntuals a la nostra API REST. Això evita recarregar tota la pàgina i els seus recursos (imatges, CSS, scripts) cada vegada, transferint només les dades necessàries en format JSON, reduint dràsticament el trànsit de xarxa.</p>
+                        <div class="prac-card__tag">Estalvi de dades</div>
                     </div>
 
-                    <div class="prac-grid">
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                                <h3>Eines col·laboratives al núvol</h3>
-                            </div>
-                            <p>Tot el projecte s'ha desenvolupat amb eines online com GitHub, Google Drive i Figma.
-                            Això ha eliminat la necessitat de desplaçaments físics per fer entregues o revisions,
-                            reduint les emissions de CO₂ associades al transport.</p>
-                            <div class="prac-card__tag">Mobilitat</div>
+                    <div class="prac-card">
+                        <div class="prac-card__header">
+                            <h3>Arquitectura MVC i Codi Net</h3>
                         </div>
-
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                                <h3>Zero paper</h3>
-                            </div>
-                            <p>Durant tot el procés de desenvolupament no hem imprès cap document, apunt, esquema
-                            ni fragment de codi. Tota la documentació, les anotacions i els prototips s'han
-                            gestionat en format digital.</p>
-                            <div class="prac-card__tag">Recursos</div>
-                        </div>
-
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                                <h3>Control de versions amb Git</h3>
-                            </div>
-                            <p>Hem fet servir Git i GitHub per gestionar el codi. Això permet treballar de forma
-                            asíncrona, evitar l'enviament de fitxers per correu (que implica copies innecessàries
-                            en servidors) i mantenir un historial de canvis sense duplicar arxius.</p>
-                            <div class="prac-card__tag">Eficiència digital</div>
-                        </div>
-
+                        <p>Hem separat la lògica de servidor (PHP) de la presentació. En reutilitzar components i models, el pes total del projecte es manté mínim. Menys codi redundant implica que el processador del servidor i del client treballen menys, estalviant energia.</p>
+                        <div class="prac-card__tag">Eficiència de CPU</div>
                     </div>
 
-                    <h2 class="prac-categoria__titol">Hàbits a l'aula</h2>
-                    <div class="prac-grid">
-
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                                <h3>Ordinadors apagats, no en suspensió</h3>
-                            </div>
-                            <p>Al final de cada sessió de treball hem apagat completament els ordinadors en lloc
-                            de deixar-los en mode suspensió o en espera. Un equip en suspensió segueix consumint
-                            entre 1 i 5W de forma contínua, mentre que apagat el consum és pràcticament zero.</p>
-                            <div class="prac-card__tag">Consum elèctric</div>
+                    <div class="prac-card">
+                        <div class="prac-card__header">
+                            <h3>Mode fosc i pantalles OLED</h3>
                         </div>
-
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                            <h3>Llum apagada quan no cal</h3>
-                            </div>
-                            <p>Durant les sessions de treball a l'aula hem aprofitat la llum natural sempre que
-                            ha estat possible i hem apagat les llums artificials en sortir. Petits gestos que,
-                            multiplicats pels dies de treball del projecte, suposen un estalvi real.</p>
-                            <div class="prac-card__tag">Consum elèctric</div>
-                        </div>
-
-                        <div class="prac-card">
-                            <div class="prac-card__header">
-                                <h3>Reutilització del hardware existent</h3>
-                            </div>
-                            <p>Tot el projecte s'ha desenvolupat amb els dispositius que ja teníem disponibles,
-                            sense adquirir cap equip nou. Prolongar la vida útil dels dispositius existents és
-                            una de les formes més efectives de reduir l'impacte ambiental de la tecnologia.</p>
-                            <div class="prac-card__tag">Economia circular</div>
-                        </div>
-
+                        <p>La interfície visual s'adapta a les preferències de l'usuari. El "Dark Mode" no és només estètica: en pantalles OLED, els píxels negres estan realment apagats, reduint el consum elèctric del dispositiu de l'usuari final.</p>
+                        <div class="prac-card__tag">Eco-Disseny</div>
                     </div>
+                </div>
+
+                <h2 class="prac-categoria__titol">RA3: Compromís Professional</h2>
+                <div class="prac-grid">
+                    <div class="prac-card">
+                        <div class="prac-card__header">
+                            <h3>Desenvolupament "Paperless"</h3>
+                        </div>
+                        <p>Tota la planificació del projecte, des del disseny de la base de dades fins als esquemes de navegació, s'ha fet mitjançant eines digitals. Hem evitat la impressió de diagrames o fragments de codi en paper durant tot el procés d'aprenentatge.</p>
+                        <div class="prac-card__tag">Residus Zero</div>
+                    </div>
+
+                    <div class="prac-card">
+                        <div class="prac-card__header">
+                            <h3>Gestió energètica de l'espai de treball</h3>
+                        </div>
+                        <p>Durant el desenvolupament a l'aula, hem mantingut una política d'apagada total dels equips en finalitzar la jornada, evitant el mode "Stand-by", i hem prioritzat la il·luminació natural per minimitzar el consum elèctric innecessari.</p>
+                        <div class="prac-card__tag">Hàbits sostenibles</div>
+                    </div>
+
+                    <div class="prac-card">
+                        <div class="prac-card__header">
+                            <h3>Eines col·laboratives al núvol</h3>
+                        </div>
+                        <p>L'ús de GitHub per al control de versions i Google Drive per a la documentació ha permès un treball asíncron i col·laboratiu sense necessitat d'intercanvis físics de suports de memòria o desplaçaments innecessaris.</p>
+                        <div class="prac-card__tag">Treball en remot</div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="prac-reflexio">
             <div class="contenidor">
                 <div class="ods-block ods-block--highlight">
-                    <h2>Per què ens importa</h2>
+                    <h2>Conclusió: Cap a un futur digital verd</h2>
                     <p>
-                        Internet i els dispositius digitals representen actualment al voltant del 4% de les emissions
-                        globals de CO₂, una xifra que creix any rere any. Com a futurs desenvolupadors web, tenim la
-                        responsabilitat d'escriure codi que no només funcioni, sinó que ho faci de la manera menys
-                        costosa per al planeta. BioChistera és el nostre primer pas en aquesta direcció.
+                        Com a desenvolupadors, som conscients que el sector TIC ja consumeix prop del 10% de l'electricitat mundial. 
+                        A BioChistera creiem que el codi ben escrit és codi sostenible. Cada línia optimitzada i cada imatge comprimida 
+                        és una petita contribució a la preservació del nostre entorn.
                     </p>
                 </div>
             </div>
         </section> 
-
     </main>
 
     <?php include_once '../layout/footer.html'; ?>

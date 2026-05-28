@@ -24,7 +24,6 @@
     font-weight: bold;
 }
 
-/* layout del form */
 form {
     display: flex;
     flex-direction: column;
@@ -34,7 +33,6 @@ form div {
     margin-bottom: 1rem;
 }
 
-/* labels */
 label {
     display: block;
     margin-bottom: 0.4rem;
@@ -42,7 +40,6 @@ label {
     color: var(--text);
 }
 
-/* inputs */
 input,
 select,
 textarea {
@@ -94,4 +91,14 @@ select option {
 input:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+input:invalid, select:invalid {
+    border-left: 5px solid #ff4d4d;
+}
+
+.submit:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
 }

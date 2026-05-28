@@ -14,7 +14,7 @@ require_once "../../controller/odsController.php";
     <title>BioChistera</title>
 </head>
 <body>
-    <?php include_once 'header.php'; ?>
+    <?php include_once '../layout/header.php'; ?>
 
     <main>
 
