@@ -35,7 +35,6 @@
 
 .problema {
     padding: 3rem 0;
-    background-color: var(--fons-2);
 }
 
 .problema h2 {
@@ -114,7 +113,6 @@
 
 .ods-cards {
     padding: 3rem 0 4rem;
-    background-color: var(--fons-2);
 }
 
 .ods-cards h2 {
@@ -240,6 +238,7 @@ body.light-mode .flip-card-back--17  { background-color: #c3c8e8; border-left: 4
 .ods-detail-hero {
     padding: 3rem 0;
     border-bottom: 1px solid rgba(255,255,255,0.08);
+    
 }
 
 .ods-detail-hero--3  { background: linear-gradient(135deg, #00490b 60%, #00a113 100%); }
@@ -409,9 +408,16 @@ body.light-mode .ods-detail-hero--17  { background: linear-gradient(135deg,  #72
     border-top: 1px solid rgba(255,255,255,0.08);
 }
 
+.contenidor {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
 .ods-nav .contenidor {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 4em;
     align-items: center;
 }
 

@@ -49,12 +49,12 @@
                     <div class="solucio__card">
                         <h3>El Mercat</h3>
                         <p>Compra, ven i intercanvia material escènic de segona mà. Allarga la vida dels objectes i estalvia diners.</p>
-                        <a href="/productes/index.php" class="boto secundari">Explorar el mercat</a>
+                        <a href="../productes/index.php" class="boto secundari">Explorar el mercat</a>
                     </div>
                     <div class="solucio__card">
                         <h3>Els Tutorials</h3>
                         <p>Repositori obert de vídeos de la comunitat. Aprèn màgia, circ i clown de forma totalment gratuïta.</p>
-                        <a href="/tutorials/index.php" class="boto secundari">Veure tutorials</a>
+                        <a href="../tutorials/index.php" class="boto secundari">Veure tutorials</a>
                     </div>
                 </div>
             </div>
@@ -69,14 +69,14 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="/public/img/ods/ods3.jpg" alt="ODS 3 - Salut i Benestar">
+                                <img src="../../public/img/ods/ods3.jpg" alt="ODS 3 - Salut i Benestar">
                                 <span class="flip-card-num">03</span>
                             </div>
                             <div class="flip-card-back flip-card-back--3">
                                 <strong class="flip-back__num">03</strong>
                                 <h3>Salut i Benestar</h3>
                                 <p>Els tutorials gratuïts permeten usar l'art com a eina terapèutica, accessible per a tothom sense barreres econòmiques.</p>
-                                <a href="/views/ods/detall.php?ods=3" class="flip-card__btn">Saber-ne més →</a>
+                                <a href="detall.php?ods=3" class="flip-card__btn">Saber-ne més →</a>
                             </div>
                         </div>
                     </div>
@@ -84,14 +84,14 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="/public/img/ods/ods10.jpg" alt="ODS 10 - Reducció de les desigualtats">
+                                <img src="../../public/img/ods/ods10.jpg" alt="ODS 10 - Reducció de les desigualtats">
                                 <span class="flip-card-num">10</span>
                             </div>
                             <div class="flip-card-back flip-card-back--10">
                                 <strong class="flip-back__num">10</strong>
                                 <h3>Reducció de Desigualtats</h3>
                                 <p>El mercat de segona mà i els tutorials gratuïts eliminen les barreres econòmiques i formatives per a artistes emergents.</p>
-                                <a href="/views/ods/detall.php?ods=10" class="flip-card__btn">Saber-ne més →</a>
+                                <a href="detall.php?ods=10" class="flip-card__btn">Saber-ne més →</a>
                             </div>
                         </div>
                     </div>
@@ -99,14 +99,14 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="/public/img/ods/ods12.jpg" alt="ODS 12 - Consum responsable">
+                                <img src="../../public/img/ods/ods12.jpg" alt="ODS 12 - Consum responsable">
                                 <span class="flip-card-num">12</span>
                             </div>
                             <div class="flip-card-back flip-card-back--12">
                                 <strong class="flip-back__num">12</strong>
                                 <h3>Consum Responsable</h3>
                                 <p>Cada compravenda de segona mà evita la fabricació d'un producte nou i el residu d'un producte usat.</p>
-                                <a href="/views/ods/detall.php?ods=12" class="flip-card__btn">Saber-ne més →</a>
+                                <a href="detall.php?ods=12" class="flip-card__btn">Saber-ne més →</a>
                             </div>
                         </div>
                     </div>
@@ -114,14 +114,14 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="/public/img/ods/ods17.jpg" alt="ODS 17 - Aliances">
+                                <img src="../../public/img/ods/ods17.jpg" alt="ODS 17 - Aliances">
                                 <span class="flip-card-num">17</span>
                             </div>
                             <div class="flip-card-back flip-card-back--17">
                                 <strong class="flip-back__num">17</strong>
                                 <h3>Aliança pels Objectius</h3>
                                 <p>La plataforma connecta compradors, venedors i creadors de contingut en una xarxa de coneixement col·lectiu.</p>
-                                <a href="/views/ods/detall.php/proc/odss.php?ods=17" class="flip-card__btn">Saber-ne més →</a>
+                                <a href="detall.php/proc/odss.php?ods=17" class="flip-card__btn">Saber-ne més →</a>
                             </div>
                         </div>
                     </div>

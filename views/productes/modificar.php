@@ -150,15 +150,19 @@ if ($token) {
         document.querySelector("form").addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            const nom = document.getElementById("nom").value.trim();
-            const categoria = document.getElementById("categoria").value;
-            const descripcio = document.getElementById("descripcio").value.trim();
-            const imatge = document.getElementById("imatge").value.trim();
             const resultat = document.getElementById("resultat");
-            const donacio = document.getElementById("donacio").value;
-            const preu = parseFloat(document.getElementById("preu").value) || 0;
 
-            const error = validar(nom, categoria, donacio, preu);
+            const dades = {
+                nom: document.getElementById("nom").value.trim(),
+                categoria: document.getElementById("categoria").value,
+                descripcio: document.getElementById("descripcio").value.trim(),
+                imatge: document.getElementById("imatge").value.trim(),
+                donacio: document.getElementById("donacio").value,
+                preu: parseFloat(document.getElementById("preu").value) || 0,
+                id_usuari: <?= json_encode($userId) ?>
+            };
+
+            const error = validar(dades);
             if (error) {
                 resultat.textContent = error;
                 return;
@@ -170,15 +174,7 @@ if ($token) {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({
-                        nom,
-                        categoria,
-                        descripcio,
-                        imatge,
-                        id_usuari,
-                        donacio,
-                        preu,
-                    })
+                    body: JSON.stringify(dades)
                 });
 
                 const data = await res.json();

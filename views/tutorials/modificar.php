@@ -35,9 +35,9 @@ if ($token) {
 
     <main class="form-main">
         <h2>Editar tutorial</h2>
-        <p id="resultat-global"></p>
+        <p style="color:red;" id="resultat"></p>
 
-        <form id="editForm" novalidate>
+        <form id="form" novalidate>
             <div>
                 <label for="nom">Títol *</label>
                 <input type="text" id="nom" required minlength="3">
@@ -84,7 +84,7 @@ if ($token) {
         const id_sessio = <?= json_encode($userId) ?>;
         const rol_sessio = <?= json_encode($userRol) ?>;
 
-        const form = document.getElementById("editForm");
+        const form = document.getElementById("form");
 
         async function carregarTutorial() {
             try {
@@ -115,61 +115,55 @@ if ($token) {
                 document.body.classList.remove("is-loading");
             }
         }
-        function marcarError(id, msg) {
-            const input = document.getElementById(id);
-            const span = document.getElementById(`error-${id}`);
-            input.classList.add("error-input");
-            span.textContent = msg;
-        }
 
-        function netejarErrors() {
-            document.querySelectorAll(".error-message").forEach(s => s.textContent = "");
-            document.querySelectorAll("input, select, textarea").forEach(i => i.classList.remove("error-input"));
-            document.getElementById("resultat-global").textContent = "";
-        }
 
-        function validar() {
-            let esValid = true;
-            const nom = document.getElementById("nom").value.trim();
-            const categoria = document.getElementById("categoria").value;
-            const url = document.getElementById("url").value.trim();
-            const durada = document.getElementById("durada").value;
+        function validar(dades) {
 
-            if (nom.length < 3) {
-                marcarError("nom", "El títol ha de tenir mínim 3 caràcters.");
-                esValid = false;
+            if (dades.nom.length < 3) {
+                return("nom", "El títol ha de tenir almenys 3 caràcters.");
             }
 
-            if (!categoria) {
-                marcarError("categoria", "Has de triar una categoria.");
-                esValid = false;
+            if (!dades.categoria) {
+                return("categoria", "Has de seleccionar una categoria.");
             }
 
-            const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-            if (!urlPattern.test(url)) {
-                marcarError("url", "Introdueix una URL vàlida.");
-                esValid = false;
+            if (dades.durada <= 0 || isNaN(dades.durada)) {
+                return("durada", "La durada ha de ser un número positiu.");
             }
 
-            if (durada < 0) {
-                marcarError("durada", "La durada no pot ser negativa.");
-                esValid = false;
+            const urlPattern = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}/;
+            if (!urlPattern.test(dades.url)) {
+                return "Introdueix una URL vàlida de YouTube.";
             }
 
-            return esValid;
+            return null;
         }
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            netejarErrors();
+            const botoSubmit = document.getElementById("btnGuardar");
 
-            if (!validar()) {
-                document.getElementById("resultat-global").textContent = "Revisa els errors del formulari.";
-                document.getElementById("resultat-global").style.color = "red";
+            const dades = {
+                nom: document.getElementById("nom").value.trim(),
+                categoria: document.getElementById("categoria").value,
+                descripcio: document.getElementById("descripcio").value.trim(),
+                durada: parseInt(document.getElementById("durada").value),
+                url: document.getElementById("url").value.trim()
+            };
+
+            const error = validar(dades);
+            if (error) {
+                resultat.style.color = "red";
+                resultat.textContent = error;
+                window.scrollTo(0, 0); 
                 return;
             }
 
             try {
+                botoSubmit.disabled = true;
+                botoSubmit.textContent = "Actualitzant...";
+                resultat.textContent = "";
+                console.log(id_tutorial)
                 const res = await fetch(`http://localhost:3001/tutorials/${id_tutorial}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
@@ -179,20 +173,20 @@ if ($token) {
                         descripcio: document.getElementById("descripcio").value.trim(),
                         durada_minuts: parseInt(document.getElementById("durada").value) || 0,
                         video_url: document.getElementById("url").value.trim(),
-                        id_usuari: id_usuari_propietari // Mantenim el propietari original
+                        id_usuari: id_usuari_propietari
                     })
                 });
 
                 if (res.ok) {
-                    document.getElementById("resultat-global").style.color = "green";
-                    document.getElementById("resultat-global").textContent = "Canvis guardats correctament!";
+                    document.getElementById("resultat").style.color = "green";
+                    document.getElementById("resultat").textContent = "Canvis guardats correctament!";
                     setTimeout(() => window.location.assign("/views/tutorials/index.php"), 1200);
                 } else {
                     const data = await res.json();
-                    document.getElementById("resultat-global").textContent = data.error || "Error en l'actualització.";
+                    document.getElementById("resultat").textContent = data.error || "Error en l'actualització.";
                 }
             } catch (err) {
-                document.getElementById("resultat-global").textContent = "Error de connexió amb el servidor.";
+                document.getElementById("resultat").textContent = "Error de connexió amb el servidor.";
             }
         });
         carregarTutorial();

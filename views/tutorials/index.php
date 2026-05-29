@@ -139,23 +139,6 @@ function comprovarVideo(url, nom) {
             </iframe>
         `;
     }
-
-    else if (url.includes("drive.google.com")) {
-
-        const match = url.match(/[-\w]{25,}/);
-
-        const id = match ? match[0] : null;
-
-        if (!id) return "";
-
-        return `
-            <iframe
-                src="https://drive.google.com/file/d/${id}/preview"
-                allow="autoplay">
-            </iframe>
-        `;
-    }
-
     return `<a href="${url}" target="_blank">${nom}</a>`;
 
 }

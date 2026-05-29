@@ -86,13 +86,11 @@
             <li class="nav-item">
                 <button id="theme-toggle" class="theme-btn" aria-label="Canviar mode">
                     <span class="icon-sun">☀︎</span>
-                    <span class="icon-moon" style="display:none;">⏾</span>
+                    <span class="icon-moon" style="display:none;">★</span>
                     <script>
                         const btn = document.getElementById('theme-toggle');
                         const sun = btn.querySelector('.icon-sun');
                         const moon = btn.querySelector('.icon-moon');
-
-                        console.log(document.body.classList.value)
                         
                         function actualitzaIcones() {
                             if (document.body.classList.contains('light-mode')) {

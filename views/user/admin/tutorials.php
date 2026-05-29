@@ -71,7 +71,7 @@ if ($payload['rol'] !== "admin") {
                             </h3>
 
                             <p class="card-user">
-                                👤 ${t.usuari_nom ?? 'Desconegut'}
+                                ${t.usuari_nom ?? 'Desconegut'}
                             </p>
 
                             <div class="card-footer">

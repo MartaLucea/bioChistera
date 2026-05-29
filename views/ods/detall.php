@@ -15,10 +15,7 @@ require_once "../../controller/odsController.php";
 </head>
 <body>
     <?php include_once '../layout/header.php'; ?>
-
-    <main>
-
-        <section class="ods-detail-hero ods-detail-hero--<?php echo $ods ?>">
+    <section class="ods-detail-hero ods-detail-hero--<?php echo $ods ?>">
             <div class="contenidor">
                 <p class="ods-hero__breadcrumb"><a href="../index.php">Inici</a> › <a href="index.php">ODS</a> ›
                     ODS <?php echo $ods ?></p>
@@ -34,6 +31,9 @@ require_once "../../controller/odsController.php";
                 </div>
             </div>
         </section>
+    <main>
+
+        
 
         <section class="ods-detail-body">
             <div class="contenidor ods-detail-grid">

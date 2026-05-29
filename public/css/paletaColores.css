@@ -40,6 +40,12 @@ body.light-mode {
     padding: 0;
 }
 
+main{
+    max-width: 1200px;
+    align-self: center;
+    justify-self: center;
+}
+
 body {
     font-family: Georgia, serif;
     background: linear-gradient(180deg, var(--fons) 0%, var(--blau) 100%);

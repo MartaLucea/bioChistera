@@ -29,7 +29,7 @@ if ($token) {
         <h2>Crear tutorial</h2>
         <p style="color:red;" id="resultat"></p>
 
-        <form>
+        <form id="tutorialForm">
             <div>
                 <label for="nom">Títol *</label>
                 <input type="text" id="nom">
@@ -66,50 +66,34 @@ if ($token) {
 
     <script>
         const form = document.getElementById("tutorialForm");
-        
-        function netejarErrors() {
-            document.querySelectorAll('.error-message').forEach(el => el.textContent = "");
-            document.querySelectorAll('input, select').forEach(el => el.classList.remove('error-input'));
-            document.getElementById("resultat-global").textContent = "";
-        }
 
-        function validarFormulari(dades) {
-            let errors = 0;
+        function validar(dades) {
 
             if (dades.nom.length < 3) {
-                marcarError("nom", "El títol ha de tenir almenys 3 caràcters.");
-                errors++;
+                return("nom", "El títol ha de tenir almenys 3 caràcters.");
             }
 
             if (!dades.categoria) {
-                marcarError("categoria", "Has de seleccionar una categoria.");
-                errors++;
+                return("categoria", "Has de seleccionar una categoria.");
             }
 
             if (dades.durada <= 0 || isNaN(dades.durada)) {
-                marcarError("durada", "La durada ha de ser un número positiu.");
-                errors++;
+                return("durada", "La durada ha de ser un número positiu.");
             }
 
-            const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+            const urlPattern = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}/;
             if (!urlPattern.test(dades.url)) {
-                marcarError("url", "Introdueix una adreça URL vàlida (http://...).");
-                errors++;
+                return("url", "Introdueix una URL de YouTube vàlida (https://...).");
             }
-
-            return errors === 0;
-        }
-
-        function marcarError(id, missatge) {
-            const input = document.getElementById(id);
-            const span = document.getElementById(`error-${id}`);
-            input.classList.add('error-input');
-            span.textContent = missatge;
+            
+            return null;
         }
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            netejarErrors();
+
+            const resultat = document.getElementById("resultat");
+
 
             const dades = {
                 nom: document.getElementById("nom").value.trim(),
@@ -119,11 +103,11 @@ if ($token) {
                 url: document.getElementById("url").value.trim()
             };
 
-            const esValid = validarFormulari(dades);
-
-            if (!esValid) {
-                document.getElementById("resultat-global").textContent = "Si us plau, corregeix els errors del formulari.";
-                document.getElementById("resultat-global").style.color = "red";
+            const error = validar(dades);
+            if (error) {
+                resultat.style.color = "red";
+                resultat.textContent = error;
+                window.scrollTo(0, 0); 
                 return;
             }
 
@@ -142,18 +126,19 @@ if ($token) {
                 });
 
                 const data = await res.json();
-
+                
                 if (res.ok) {
-                    document.getElementById("resultat-global").style.color = "green";
-                    document.getElementById("resultat-global").textContent = "Tutorial creat amb èxit! Redirigint...";
-                    setTimeout(() => window.location.assign("/views/tutorials/index.php"), 1500);
+                    resultat.style.color = "green";
+                    resultat.textContent = "Tutorial creat correctament! Redirigint...";
+                    setTimeout(() => {
+                        window.location.assign("/views/user/paginaUsuari.php");
+                    }, 1200);
                 } else {
-                    document.getElementById("resultat-global").style.color = "red";
-                    document.getElementById("resultat-global").textContent = data.error || "Error en guardar.";
+                    throw new Error(data.error || "Error en el servidor");
                 }
 
             } catch (err) {
-                document.getElementById("resultat-global").textContent = "Error crític de connexió.";
+                resultat.textContent = "Error crític de connexió.";
                 console.error(err);
             }
         });

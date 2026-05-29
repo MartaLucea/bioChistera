@@ -37,11 +37,6 @@
         </div>
 
         <div class="video">
-            <iframe
-                id="video"
-                frameborder="0"
-                allowfullscreen>
-            </iframe>
         </div>
 
         <div class="card">
@@ -67,6 +62,44 @@ const id = params.get('id');
 
 function formatData(data) {
     return new Date(data).toLocaleDateString('ca-ES');
+}
+
+
+function comprovarVideo(url, nom) {
+
+    if (!url) return "";
+
+    if (url.includes("youtube.com/embed")) {
+
+        return `
+            <iframe
+                src="${url}"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+        `;
+    }
+
+    if (url.includes("youtube.com") || url.includes("youtu.be")) {
+
+        let videoId = "";
+
+        if (url.includes("youtu.be")) {
+            videoId = url.split("/").pop();
+        } else {
+            videoId = new URL(url).searchParams.get("v");
+        }
+
+        return `
+            <iframe
+                src="https://www.youtube.com/embed/${videoId}"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+        `;
+    }
+    return `<a href="${url}" target="_blank">${nom}</a>`;
+
 }
 
 async function carregarTutorial() {
@@ -103,7 +136,13 @@ async function carregarTutorial() {
         document.getElementById('durada').textContent =
             `${t.durada_minuts} min`;
 
-        document.getElementById('video').src = t.video_url;
+        const videoHtml = comprovarVideo(t.video_url, t.titol);
+
+        if (videoHtml.includes("<iframe")) {
+            document.querySelector('.video').innerHTML = videoHtml;
+        } else {
+            mostrarError();
+        }
 
         document.getElementById('descripcio').textContent =
             t.descripcio;
